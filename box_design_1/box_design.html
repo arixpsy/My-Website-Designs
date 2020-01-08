@@ -6,159 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Box Design</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"/>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            color: #616161;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        h2{
-            font-size: 1.6rem;
-        }
-        p{
-            font-size: 1.1rem;
-        }
-        body{
-            display: flex;
-            align-items: center;
-            height: 100vh;
-            background-color: #96C1FA;
-        }
-        main {
-            display: grid;
-            grid-template-columns: 1fr min-content;
-            margin: auto;
-            width: min-content;
-        }
-        main > header {
-            grid-column: span 2;
-            display: flex;
-            align-items: flex-end;
-            padding-left: 25px;
-        }
-        header > h1{
-            padding: 5px 25px 5px 25px;
-            font-size: 3rem;
-            display: inline-block;
-            background-color: #FFE575;
-            border-radius: 25px 25px 0 0;
-            color: white;
-        }
-        .main-box{
-            width: 700px;
-            height: 600px;
-            border: 5px white solid;
-            border-radius: 25px;
-            background-color: white;
-            box-shadow: 0 0px 10px 0px rgba(0,0,0,0.25);
-            position: relative;
-            z-index: 5;
-        }
-        .box-content > *{
-            color: #616161 ;
-
-        }
-        .content-group > img{
-            width: 100%;
-        }
-        .box-content{
-            padding: 0px
-        }
-        .home-content{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            height: 100%;
-        }
-        .home-content .content-group{
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .home-content .content-group:nth-child(1), .home-content .content-group:nth-child(2) {
-            justify-content: center;
-        }
-
-        .home-content .content-group h2 {
-            padding-bottom: 15px;
-            display: grid;
-        }
-        .home-content .content-group h2::after {
-            content: "";
-            margin-top: 5px;
-            height: 5px;
-            width: 100%;
-            background-color: #96C1FA;
-        }
-        .navbar {
-            padding-top: 25px;
-        }
-        .navbar ul{
-            list-style-type: none;
-        }
-        .navbar li{
-            padding: 15px;
-            border-radius: 0 25px 25px 0;
-            margin-bottom: 5px;
-            transition: transform ease-out 150ms;
-            transform-origin: left center;
-            cursor: pointer;
-        }
-        .navbar li:hover{
-            transform: scale(1.1);
-            
-        }
-        .navbar li a{
-            color: white;
-            font-weight: bold;
-        }
-        .navbar li:nth-child(1){
-            background-color: #FFE575;
-        }
-        .navbar li:nth-child(2){
-            background-color: #FFE575;
-        }
-        .navbar li:nth-child(3){
-            background-color: #FFE575;
-        }
-        footer ul{
-            list-style-type: none;
-            padding-left: 25px;
-        }
-        footer li{
-            display: inline-block;
-            padding: 10px 10px 15px 10px;
-            background-color: #FFE575;
-            font-size: 2rem;
-            position: relative;
-        }
-        footer li::after{
-            content: "";
-            display: block;
-            position: absolute;
-            bottom: 0px;
-            left: 0px;
-            height: 0;
-            width: 0;
-            border-bottom: 10px #96C1FA solid;
-            border-left: 24px solid transparent;
-            border-right: 24px solid transparent;
-        }
-        footer li a i{
-            color: white;
-        }
-        /* Color Theme Swatches in Hex 
-        $Colorful-1-hex: #FF938F;
-        $Colorful-2-hex: #CB8AFA;
-        $Colorful-3-hex: #96C1FA;
-        $Colorful-4-hex: #91FAC9;
-        $Colorful-5-hex: #FFE575;
-        */
-
-    </style>
+    <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
     <main>
@@ -183,21 +31,18 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero distinctio unde aspernatur officia, deleniti neque tenetur eos? Expedita, reiciendis nulla.</p>
                 </div>
             </div>
-            <div class="box-content">
-
-            </div>
         </div>
         <nav class="navbar">
             <ul>
-                <li><a>Home</a></li>
-                <li><a>Gallery</a></li>
-                <li><a>Content</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Content</a></li>
             </ul>
         </nav>
         <footer>
             <ul>
-                <li><a><i class="fab fa-instagram"></i></a></li>
-                <li><a><i class="fab fa-facebook-square"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
             </ul>
         </footer>
     </main>
