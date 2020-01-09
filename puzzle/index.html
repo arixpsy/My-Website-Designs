@@ -36,6 +36,9 @@
             display: inline-flex;
             list-style-type: none;
         }
+        header li{
+            padding-right: 5rem;
+        }
         header{
             position: fixed;
         }
@@ -48,6 +51,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .banner-content{
+            padding-left: 5rem;
+        }
+        .banner-content > h2{
+            font-family: 'Work Sans', sans-serif;
+        }
+        .banner-content > h2, .banner-content > p {
+            padding-bottom: 2rem;
+        }
+        .btn-list{
+            margin-top: 1rem;
+        }
+        .btn-white{
+            padding: 1rem 2rem;
+            border: 2px solid #1C2C71;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        .btn-blue{
+            color: white;
+            padding: 1rem 2rem;
+            background-color: #1C2C71;
+            border: 2px solid #1C2C71;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-left: 15px;
         }
         .puzzle-grid{
             width: 100vh;
@@ -103,21 +133,87 @@
         }
 
 
-
+        .circle-animation{
+            animation-fill-mode: forwards;
+            animation-duration: 0.3s;
+        }
         .circle-1{
             transform: translateX(-50%);
+            animation-name: circle-1;
         }
         .circle-2{
             transform: translateY(-50%);
+            animation-name: circle-2;
         }
         .circle-3{
             transform: translateY(50%);
+            animation-name: circle-3;
+            animation-delay: 0.6s;
         }
         .circle-4{
-
+            transform: translateY(0%);
+            animation-name: circle-4;
+            animation-delay: 0.3s;
         }
         .circle-5{
             transform: translateX(-50%);
+            animation-name: circle-5;
+            animation-delay: 0.6s;
+        }
+        .circle-6{
+            animation-name: circle-6;
+            animation-delay: 0.6s;
+        }
+        .circle-7{
+            transform: translateY(50%);
+            animation-name: circle-7;
+            animation-delay: 1.2s;
+        }
+        .circle-8{
+            animation-name: circle-8;
+            animation-delay: 0.9s;
+        }
+        .circle-9{
+            transform: translateY(50%);
+            animation-name: circle-9;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes circle-1 {
+            from {transform: translateX(-50%);}
+            to {transform: translateX(50%);}
+        }
+        @keyframes circle-2 {
+            from {transform: translateY(-50%);}
+            to {transform: translateY(-100%);}
+        }
+        @keyframes circle-3 {
+            from {transform: translateY(50%);}
+            to {transform: translateY(0%);}
+        }
+        @keyframes circle-4 {
+            from {transform: translateY(0%);}
+            to {transform: translateY(-100%);}
+        }
+        @keyframes circle-5 {
+            from {transform: translateX(-50%);}
+            to {transform: translateX(50%);}
+        }
+        @keyframes circle-6 {
+            from {transform: translateX(0%);}
+            to {transform: translateX(50%);}
+        }
+        @keyframes circle-7 {
+            from {transform: translateY(50%);}
+            to {transform: translateY(0%);}
+        }
+        @keyframes circle-8 {
+            from {transform: translateY(0%);}
+            to {transform: translateY(-100%);}
+        }
+        @keyframes circle-9 {
+            from {transform: translateY(50%);}
+            to {transform: translateY(-50%);}
         }
     </style>
 </head>
@@ -134,20 +230,22 @@
         </header>
         <section class="banner">
             <div class="banner-content">
-                <h2>ONE PATTERN.<br>VARIOUS PATTERNS.</h2>
+                <h2>ONE ELEMENT.<br>VARIOUS PATTERNS.</h2>
                 <p>A powerful vector tool for fast pattern building that will revolutionize your design.</p>
-                <a>LEARN MORE</a>
-                <a>DOWNLOAD</a>
+                <div class="btn-list">
+                    <a href="#" class="btn-white">LEARN MORE</a>
+                    <a href="#" class="btn-blue">DOWNLOAD</a>
+                </div>
             </div>
             <div class="puzzle-grid">
 
                 <!-- Row 1-->
                 <div></div>
                 <div class="beige">
-                    <div class="circle red circle-1"></div>
+                    <div class="circle red circle-1 circle-animation"></div>
                 </div>
                 <div>
-                    <div class="circle blue circle-2"></div>
+                    <div class="circle blue circle-2 circle-animation"></div>
                 </div>
                 <div class="yellow">
                     <div class="semi-right">
@@ -158,7 +256,7 @@
                 <!-- Row 2-->
                 <div></div>
                 <div class="blue">
-                    <div class="circle beige circle-3"></div>
+                    <div class="circle beige circle-3 circle-animation"></div>
                 </div>
                 <div style="text-align: right;">
                     <div class="semi-left">
@@ -166,14 +264,14 @@
                     </div>
                 </div>
                 <div class="beige">
-                    <div class="semi-right circle-4">
+                    <div class="semi-right circle-4 circle-animation">
                         <div class="circle yellow"></div>
                     </div>
                 </div>
 
                 <!-- Row 3-->
                 <div class="beige">
-                    <div class="circle red circle-5"></div>
+                    <div class="circle red circle-5 circle-animation"></div>
                 </div>
                 <div></div>
                 <div class="yellow">
@@ -183,13 +281,13 @@
                 </div>
                 <div class="beige">
                     <div class="semi-left">
-                        <div class="circle red"></div>
+                        <div class="circle red circle-6 circle-animation"></div>
                     </div>
                 </div>
 
                 <!-- Row 4-->
                 <div class="blue">
-                    <div class="circle beige"></div>
+                    <div class="circle beige circle-7 circle-animation"></div>
                 </div>
                 <div>
                     <div class="semi-left">
@@ -197,12 +295,12 @@
                     </div>
                 </div>
                 <div class="beige">
-                    <div class="semi-right">
-                        <div class="circle yellow"></div>
+                    <div class="semi-right circle-8 circle-animation">
+                        <div class="circle yellow "></div>
                     </div>
                 </div>
                 <div>
-                    <div class="circle blue"></div>
+                    <div class="circle blue circle-9 circle-animation"></div>
                 </div>
             </div>
         </section>
