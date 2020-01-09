@@ -16,6 +16,7 @@ body{
     align-items: center;
     height: 100vh;
     background-color: #96C1FA;
+    overflow: hidden;
 }
 main {
     display: grid;
@@ -123,7 +124,7 @@ footer li{
     transform-origin: top center;
 }
 footer li:hover{
-    transform: translateY(110px);
+    transform: translateY(10px);
 }
 footer li::before{
     content: "";

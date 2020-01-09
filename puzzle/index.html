@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Puzzle Design</title>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:700&display=swap" rel="stylesheet">
+    <style>
+        /* 
+            beige #E3D7D7
+            yellow #E7B65D
+            red #C27F62
+            blue #1F3073
+        
+        */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            color: #1C2C71;
+        }
+        header{
+            height: 50px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        header h1 {
+            font-family: 'Work Sans', sans-serif;
+            display: inline-block;
+            padding: 0px 5rem;
+        }
+        header ul{
+            display: inline-flex;
+            list-style-type: none;
+        }
+        header{
+            position: fixed;
+        }
+        section{
+            height: 100vh;
+            width: 100%;
+        }
+
+        .banner{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .puzzle-grid{
+            width: 100vh;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+        }
+        .beige{
+            background-color: #E3D7D7;
+        } 
+        .yellow{
+            background-color: #E7B65D;
+        }
+        .red{
+            background-color: #C27F62;
+        }
+        .blue{
+            background-color: #1F3073;
+        }
+        .white{
+            background-color: white;
+        }
+        .circle{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .semi-right{
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .semi-right > .circle{
+            position: relative;
+            left: -100%;
+        }
+        .semi-left{
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            margin-left: 50%;
+        }
+        .semi-left > .circle{
+            position: relative;
+        }
+        .semi-right .circle, .semi-left .circle{
+            width:200%;
+        }
+        
+        .semi-top .circle, .semi-bottom .circle{
+            height:200%;
+        }
+
+
+
+        .circle-1{
+            transform: translateX(-50%);
+        }
+        .circle-2{
+            transform: translateY(-50%);
+        }
+        .circle-3{
+            transform: translateY(50%);
+        }
+        .circle-4{
+
+        }
+        .circle-5{
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>PATTERN IT!</h1>
+            <ul>
+                <li>About</li>
+                <li>Pricing</li>
+                <li>Blog</li>
+                <li>Our Team</li>
+            </ul>
+        </header>
+        <section class="banner">
+            <div class="banner-content">
+                <h2>ONE PATTERN.<br>VARIOUS PATTERNS.</h2>
+                <p>A powerful vector tool for fast pattern building that will revolutionize your design.</p>
+                <a>LEARN MORE</a>
+                <a>DOWNLOAD</a>
+            </div>
+            <div class="puzzle-grid">
+
+                <!-- Row 1-->
+                <div></div>
+                <div class="beige">
+                    <div class="circle red circle-1"></div>
+                </div>
+                <div>
+                    <div class="circle blue circle-2"></div>
+                </div>
+                <div class="yellow">
+                    <div class="semi-right">
+                        <div class="circle white"></div>
+                    </div>
+                </div>
+
+                <!-- Row 2-->
+                <div></div>
+                <div class="blue">
+                    <div class="circle beige circle-3"></div>
+                </div>
+                <div style="text-align: right;">
+                    <div class="semi-left">
+                        <div class="circle beige"></div>
+                    </div>
+                </div>
+                <div class="beige">
+                    <div class="semi-right circle-4">
+                        <div class="circle yellow"></div>
+                    </div>
+                </div>
+
+                <!-- Row 3-->
+                <div class="beige">
+                    <div class="circle red circle-5"></div>
+                </div>
+                <div></div>
+                <div class="yellow">
+                    <div class="semi-right">
+                        <div class="circle white"></div>
+                    </div>
+                </div>
+                <div class="beige">
+                    <div class="semi-left">
+                        <div class="circle red"></div>
+                    </div>
+                </div>
+
+                <!-- Row 4-->
+                <div class="blue">
+                    <div class="circle beige"></div>
+                </div>
+                <div>
+                    <div class="semi-left">
+                        <div class="circle beige"></div>
+                    </div>
+                </div>
+                <div class="beige">
+                    <div class="semi-right">
+                        <div class="circle yellow"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="circle blue"></div>
+                </div>
+            </div>
+        </section>
+        <section>
+
+        </section>
+    </main>
+</body>
+</html>
