@@ -14,6 +14,7 @@
     --navbar-height: 70px;
     --edge-space: 25px;
     --normal-fs: 1.2rem;
+    --content-title-fs: 1.5rem;
     --title-fs: 2.5rem;
     --icon-fs: 2rem;
 }
@@ -203,8 +204,25 @@ section{
     align-items: center;
 }
 .content {
+    counter-reset: content -1;
     padding: var(--edge-space) 0px;
     flex-direction: column;
+}
+.content h2{
+    font-size: var(--content-title-fs);
+    font-weight: normal;
+    margin-bottom: var(--edge-space);
+}
+.content h2:before{
+    content: "[" counter(content) "] ";
+    counter-increment: content;
+    color: var(--main-color);
+}
+.content p{
+    font-size: var(--normal-fs);
+}
+.content-section{
+    margin: var(--edge-space) 0;
 }
 footer{
     background-color: var(--bg-color);
@@ -269,6 +287,8 @@ footer{
         --title-fs: 3.5rem;
         --icon-fs: 2.5rem;
         --edge-space: 50px;
+        --content-title-fs: 2rem;
+
     }
     header ul{
         height: initial;

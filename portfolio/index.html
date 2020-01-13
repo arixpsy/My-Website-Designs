@@ -46,26 +46,67 @@
         </section>
         <section class="content">
             <div class="container">
-                <div id="Aboutme">
-                    <h2 class="mono-font color-light" style="font-weight: normal;"><span class="color-main">[0]</span> About me</h2>
+                <div id="Aboutme" class="content-section">
+                    <h2 class="mono-font color-light">About me</h2>
+                    <p class="general-font color-contrast">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt amet, minus, veritatis cupiditate reiciendis atque optio earum nihil dicta, aperiam aspernatur provident saepe quos animi officia odit cum adipisci possimus.</p>
                 </div>
-                <div id="Experience">
-                    <div class="box bgc-main"></div>
-                    <div class="box bgc-alt"></div>
-                    <div class="box bgc-light"></div>
-                    <div class="box bgc-contrast"></div>
+                <div id="Experience" class="content-section">
+                    <h2 class="mono-font color-light">Experience</h2>
+                    <style>
+                        .timeline-grid{
+                            position: relative;
+                            display: grid;
+                            grid-template-columns: min-content 1fr;
+                            column-gap: var(--edge-space);
+                        }
+                        .timeline-content{
+                            margin-bottom: 25px;
+                            position:relative;
+                            top: -10px;
+                        }
+                        .timeline-point-container{
+                            position: relative;
+                            display: flex;
+                        }
+                        .timeline-point{
+                            height: 20px;
+                            width: 20px;
+                            background-color: var(--main-color);
+                            border-radius: 50%;
+                        }
+                        .timeline-point-container:not(:nth-last-child(2)) > .timeline-point:after{
+                            content: '';
+                            position: absolute;
+                            height: 100%;
+                            width: 2px;
+                            top: 10px;
+                            left: 9px;
+                            background-color: var(--main-color);
+                        }
+                    </style>
+                    <div class="timeline-grid">
+                        <div class="timeline-point-container"><div class="timeline-point"></div></div>
+                        <div class="timeline-content general-font color-contrast"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad veritatis facilis ex, facere quam reprehenderit fugit quasi explicabo voluptatibus itaque?</p></div>
+                        <div class="timeline-point-container"><div class="timeline-point"></div></div>
+                        <div class="timeline-content general-font color-contrast"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque dolores dicta mollitia suscipit aut maiores commodi autem fugit provident blanditiis, veniam maxime, facilis ex illo corrupti cumque, nobis enim tempora ullam. Similique est commodi necessitatibus provident in perferendis aut quis magni quidem iste.</p></div>
+                        <div class="timeline-point-container"><div class="timeline-point"></div></div>
+                        <div class="timeline-content general-font color-contrast"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat natus officia, dolore, inventore omnis repellat aspernatur dolor porro, facere suscipit unde reprehenderit sequi!</p></div>
+                        <div class="timeline-point-container"><div class="timeline-point"></div></div>
+                        <div class="timeline-content general-font color-contrast"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere expedita exercitationem quas asperiores maiores rem non, fuga molestias sit doloribus eaque tenetur laudantium beatae cupiditate pariatur quia quis?</p></div>
+                    </div>
                 </div>
-                <div id="Projects">
-                    <div class="box bgc-main"></div>
-                    <div class="box bgc-alt"></div>
-                    <div class="box bgc-light"></div>
-                    <div class="box bgc-contrast"></div>
+                <div id="Projects" class="content-section">
+                    <h2 class="mono-font color-light">Projects</h2>
+                    <p class="general-font color-contrast">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt amet, minus, veritatis cupiditate reiciendis atque optio earum nihil dicta, aperiam aspernatur provident saepe quos animi officia odit cum adipisci possimus.</p>
+                
+                    <div class="project-grid">
+
+                    </div>
                 </div>
-                <div id="Etc">
-                    <div class="box bgc-main"></div>
-                    <div class="box bgc-alt"></div>
-                    <div class="box bgc-light"></div>
-                    <div class="box bgc-contrast"></div>
+                <div id="Etc" class="content-section">
+                    <h2 class="mono-font color-light">Etc</h2>
+                    <p class="general-font color-contrast">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt amet, minus, veritatis cupiditate reiciendis atque optio earum nihil dicta, aperiam aspernatur provident saepe quos animi officia odit cum adipisci possimus.</p>
+                
                 </div>
             </div>
         </section>
@@ -73,6 +114,10 @@
     <footer>
         <p>[Build and developed by Arix Phua]</p>
     </footer>
-    
+    <script>
+        window.addEventListener("resize", function() {
+            document.getElementById("drawer").checked = false;
+        });
+    </script>
 </body>
 </html>
