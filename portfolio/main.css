@@ -13,8 +13,10 @@
 
     --navbar-height: 70px;
     --edge-space: 25px;
+
     --normal-fs: 1.2rem;
     --content-title-fs: 1.5rem;
+    --small-fs: 0.8rem;
     --title-fs: 2.5rem;
     --icon-fs: 2rem;
 }
@@ -106,6 +108,7 @@ input[type='checkbox']:checked + ul{
     box-shadow: rgba(0,0,0,0.6) 0px 0px 0vh 100vh;
 }
 header ul{
+    z-index: 9;
     position: fixed;
     display: flex;
     list-style-type: none;
@@ -224,6 +227,80 @@ section{
 .content-section{
     margin: var(--edge-space) 0;
 }
+
+.timeline-grid{
+    position: relative;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    column-gap: var(--edge-space);
+}
+.timeline-content{
+    margin-bottom: 25px;
+    position:relative;
+    top: -10px;
+    z-index: -1;
+}
+.timeline-point-container{
+    transform: translateY(var(--normal-fs));
+}
+.timeline-content > h3{
+    font-size: calc(var(--content-title-fs) - 0.5rem);
+    color: var(--light-contrast-color);
+    font-weight: normal;
+    
+}
+.timeline-content > h4{
+    font-size: var(--small-fs);
+    color: var(--main-color);
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+.timeline-content > p{
+    margin-bottom: var(--normal-fs);
+    font-size: calc(var(--normal-fs) - 0.2rem);
+}
+.timeline-point-container{
+    position: relative;
+    display: flex;
+    z-index: -1;
+}
+.timeline-point{
+    height: 20px;
+    width: 20px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+}
+.timeline-point-container:not(:nth-last-child(2)) > .timeline-point:after{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    top: 10px;
+    left: 9px;
+    background-color: var(--main-color);
+}
+.project-container{
+    display: grid;
+    row-gap: var(--edge-space);
+}
+.project-grid{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-areas: 'project-image project-content';
+}
+.project-grid:nth-child(even){
+    grid-template-columns: 40% 60%;
+    grid-template-areas: 'project-content project-image';
+}
+.project-image{
+    width: 100%;
+    height: 300px;
+    background-color: var(--main-color);
+    grid-area: project-image;
+}
+.project-content{
+    grid-area: project-content;
+}
 footer{
     background-color: var(--bg-color);
     color: var(--main-color);
@@ -284,6 +361,7 @@ footer{
 @media screen and (min-width: 768px){
     :root{
         --normal-fs: 1.3rem;
+        --small-fs: 0.9rem;
         --title-fs: 3.5rem;
         --icon-fs: 2.5rem;
         --edge-space: 50px;
@@ -315,6 +393,7 @@ footer{
 @media screen and (min-width: 1000px){
     :root{
         --normal-fs: 1.4rem;
+        --small-fs: 1rem;
         --title-fs: 4rem;
         --icon-fs: 3rem;
     }
