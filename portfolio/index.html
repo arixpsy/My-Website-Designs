@@ -13,7 +13,7 @@
     <!-- <div class="loading-screen logo-font color-main">
         HELLO
     </div> -->
-    <header class="bgc-bg">
+    <header class="bgc-bg" id="navbar">
         <div><h1 class="logo-font color-main">AP</h1></div>
         <nav>
             <label class="drawer-area"for="drawer"><div class="drawer"></div></label>
@@ -74,7 +74,7 @@
                 </div>
 
 
-                <div id="Projects" class="content-section">
+                <div id="Projects" class="content-section" style="display:none;">
                     <h2 class="mono-font color-light">Work & Projects</h2>
                     <div class="project-container">
                         <div class="project-grid">
@@ -89,7 +89,7 @@
                                     <ul class="mono-font color-main">
                                         <li>PHP</li>
                                         <li>Laravel</li>
-                                        <li>Cordorva</li>
+                                        <li>Cordova</li>
                                         <li>Framework7</li>
                                     </ul>
                                 </div>
@@ -118,7 +118,7 @@
                 
                 <div id="Etc" class="content-section">
                     <h2 class="mono-font color-light">Etc</h2>
-                    <div class="general-font">
+                    <div class="general-font etc-container">
                         <div>
                             <h3>SMU .Hack</h3>
                             <h4>Honorary General Secretary</h4>
@@ -141,6 +141,32 @@
         window.addEventListener("resize", function() {
             document.getElementById("drawer").checked = false;
         });
+
+        let previousScrollValue = 0;
+        let navbarElement = document.getElementById("navbar");
+        window.addEventListener("scroll", function(e){
+            let currentScrollValue = document.documentElement.scrollTop;
+            if (currentScrollValue > previousScrollValue){
+                navbarElement.classList.add("navbar-hide");
+                navbarElement.classList.remove("navbar-shadow");
+            } else {
+                if(currentScrollValue == 0){
+                    navbarElement.classList.remove("navbar-shadow");
+                }else{
+                    navbarElement.classList.add("navbar-shadow");
+                }
+                navbarElement.classList.remove("navbar-hide");
+            }
+            previousScrollValue = currentScrollValue <= 0 ? 0 : currentScrollValue;
+        });
+
+        const navbarLinks = document.querySelectorAll("#navbar a");
+        for (let i = 0; i < navbarLinks.length; i++) {
+            navbarLinks[i].addEventListener("click", function(){
+                //navbarElement.classList.add("navbar-hide");
+                document.getElementById("drawer").checked = false;
+            });
+        }
     </script>
 </body>
 </html>
