@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./three.js"></script>
+    <script src="./main.js" defer></script>
+    <style>
+        :root{
+            --nav-bar-height: 80px;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0 0;
+            padding: 0 0;
+            color: white;
+        }
+        body{
+            /* background-color: black; */
+        }
+        header{
+            height: var(--nav-bar-height);
+            position: fixed;
+        }
+        section{
+            padding-top: var(--nav-bar-height);
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+        }
+        .slide h1 {
+            /* color: white; */
+        }
+        .slide-down{
+            transform: translateY(100vh);
+        }
+        .pagination{
+            position: fixed;
+            /* color: white; */
+            right: 0px;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .background{
+            position: fixed;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            BTS
+        </header>
+        <div class="background" id="background">
+
+        </div>
+        <div class="pagination">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+        <section class="slide">
+            <h1>Slide 1</h1>
+        </section>
+        <section class="slide slide-down">
+            <h1>Slide 2</h1>
+        </section>
+        <section class="slide slide-down">
+            <h1>Slide 3</h1>
+        </section>
+    </div>
+</body>
+</html>
