@@ -40,7 +40,7 @@ function createParticles(){
 
     var mesh= new THREE.Mesh( geom, new THREE.MeshNormalMaterial() );
     mesh.position.z = 300;
-    scene.add( mesh);
+    // scene.add( mesh);
 }
 
 function animate () {
