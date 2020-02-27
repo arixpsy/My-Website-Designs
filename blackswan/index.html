@@ -6,57 +6,111 @@
     <title>Document</title>
     <script src="./three.js"></script>
     <script src="./main.js" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,700&display=swap" rel="stylesheet">
     <style>
         :root{
             --nav-bar-height: 80px;
+            --edge-spacing: 75px;
         }
         * {
             box-sizing: border-box;
             margin: 0 0;
             padding: 0 0;
-            color: white;
-        }
-        body{
-            /* background-color: black; */
+            color: whitesmoke;
+            font-family: 'Quicksand' ;
         }
         header{
             height: var(--nav-bar-height);
+            width: 100%;
             position: fixed;
+            color: whitesmoke;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header > h1{
+            font-size: 2rem;
+            font-weight: 300;
         }
         section{
-            padding-top: var(--nav-bar-height);
             height: 100vh;
             width: 100vw;
             position: fixed;
         }
-        .slide h1 {
-            /* color: white; */
+        
+        .slide{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: transform 1s cubic-bezier(0.22, 0.44, 0, 1);
+        }
+        .slide-up{
+            transform: translateY(-100vh);
         }
         .slide-down{
             transform: translateY(100vh);
         }
         .pagination{
             position: fixed;
-            /* color: white; */
             right: 0px;
             height: 100vh;
             display: flex;
             align-items: center;
+            padding-right: var(--edge-spacing);
+        }
+        .pagination ul{
+            list-style-type: none;
+        }
+        .pagination li{
+            text-align: center;
+        }
+        .scroll-tab{
+            position:fixed;
+            width: 100vw;
+            bottom: 0px;
+            display: flex;
+            justify-content: center;
+            padding-bottom: var(--edge-spacing);
+        }
+        .scroll-text{
+            position: relative;
+            color: whitesmoke;
+        }
+        .scroll-text::after{
+            position:absolute;
+            content:'';
+            width: 100%;
+            background-color: whitesmoke;
+            height: 2px;
+            bottom: -5px;
+            left:0;
         }
         .background{
             position: fixed;
             z-index: -1;
         }
+        .shadow{
+            position: fixed;
+            pointer-events: none;
+            height: 100%;
+            width: 100%;
+            background: radial-gradient(circle at 50%, transparent 5%, #000000 60%),
+            linear-gradient(to bottom, rgba(0,0,0,0.7) 20%,rgba(0,0,0,0.4) 35%, transparent 50%,rgba(0,0,0,0.4) 65%, rgba(0,0,0,0.7) 100%);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            BTS
-        </header>
         <div class="background" id="background">
 
         </div>
+        <div class="shadow">
+
+        </div>
+        <header>
+            <h1>BTS</h1>
+        </header>
         <div class="pagination">
             <ul>
                 <li>1</li>
@@ -64,14 +118,18 @@
                 <li>3</li>
             </ul>
         </div>
+        <div class="scroll-tab">
+            <div class="scroll-text">Scroll</div>
+        </div>
         <section class="slide">
-            <h1>Slide 1</h1>
+            <h1>MAP OF THE SOUL 7</h1>
+            <h2>4th FULL-LENGTH ALBUM</h2>
         </section>
         <section class="slide slide-down">
-            <h1>Slide 2</h1>
+            <h1>COMEBACK MAP</h1>
         </section>
         <section class="slide slide-down">
-            <h1>Slide 3</h1>
+            <h1>TRACK LIST</h1>
         </section>
     </div>
 </body>
