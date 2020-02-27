@@ -1,25 +1,46 @@
-let scene, camera, renderer, cube, light;
+let scene, camera, renderer, cube, light, particles;
 
 function init(){
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1 , 5 );
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1 , 1000 );
 
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({ antialias: true});
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.getElementById('background').appendChild( renderer.domElement );
-    geometry = new THREE.IcosahedronGeometry();
-    material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF } );
+    geometry = new THREE.IcosahedronGeometry(200);
+    material = new THREE.MeshLambertMaterial( { color: 0xffffff } );
     cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 
-    camera.position.z = 2.5;
+    camera.position.z = 500;
 
-    light = new THREE.SpotLight( 0xFFFFFF, 1, 58);
-    light.position.set( 0, 20, 50);
+    light = new THREE.SpotLight( 0xFFFFFF, 1, 500);
+    light.position.set( 0, 200, 500);
     scene.add( light );
 
     scene.background = new THREE.Color(0x454A4D);
+    createParticles();
+}
 
+function createParticles(){
+    // particles = new THREE.Group();
+    
+    // scene.add(particles);
+    var geom = new THREE.Geometry();
+    var v1 = new THREE.Vector3(0,0,0);
+    var v2 = new THREE.Vector3(15,0,0);
+    var v3 = new THREE.Vector3(15,15,0);
+
+    geom.vertices.push(v1);
+    geom.vertices.push(v2);
+    geom.vertices.push(v3);
+
+    geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
+    geom.computeFaceNormals();
+
+    var mesh= new THREE.Mesh( geom, new THREE.MeshNormalMaterial() );
+    mesh.position.z = 300;
+    scene.add( mesh);
 }
 
 function animate () {
@@ -46,6 +67,11 @@ function nextSlide(){
         let slideDeck = document.querySelectorAll(".slide");
         slideDeck[currentSlide].classList.add("slide-up");
         slideDeck[currentSlide + 1].classList.remove("slide-down");
+        
+        let paginationDeck = document.querySelectorAll(".pagination ul li");
+        paginationDeck[currentSlide].classList.remove("active-pagination");
+        paginationDeck[currentSlide + 1].classList.add("active-pagination");
+        
         currentSlide++;
     }
 }
@@ -55,6 +81,11 @@ function previousSlide(){
         let slideDeck = document.querySelectorAll(".slide");
         slideDeck[currentSlide].classList.add("slide-down");
         slideDeck[currentSlide - 1].classList.remove("slide-up");
+
+        let paginationDeck = document.querySelectorAll(".pagination ul li");
+        paginationDeck[currentSlide].classList.remove("active-pagination");
+        paginationDeck[currentSlide - 1].classList.add("active-pagination");
+
         currentSlide--;
     }
 }

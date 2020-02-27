@@ -1,0 +1,134 @@
+:root{
+    --nav-bar-height: 80px;
+    --edge-spacing: 75px;
+}
+* {
+    box-sizing: border-box;
+    margin: 0 0;
+    padding: 0 0;
+    color: whitesmoke;
+    font-family: 'Quicksand' ;
+}
+header{
+    height: var(--nav-bar-height);
+    width: 100%;
+    position: fixed;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header > h1{
+    font-size: 2rem;
+    font-weight: 300;
+}
+section{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+.slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: transform 1s cubic-bezier(0.22, 0.44, 0, 1);
+}
+.slide-up{
+    transform: translateY(-100vh);
+}
+.slide-down{
+    transform: translateY(100vh);
+}
+.drawer{
+    position: fixed;
+    left: 0px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-left: var(--edge-spacing);
+    z-index: 5;
+}
+.drawer-icon{
+    height: 45px;
+    width: 40px;
+    /* background-color: whitesmoke; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px 0px;
+}
+.drawer-icon span{
+    height: 3px;
+    width: 75%;
+    background-color: whitesmoke;
+}
+.drawer-icon span:first-child, .drawer-icon span:last-child{
+    width: 100%;
+}
+.drawer-icon:hover{
+    
+}
+.pagination{
+    position: fixed;
+    right: 0px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-right: var(--edge-spacing);
+}
+.pagination ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+}
+.pagination li{
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    margin: 20px;
+    transform-origin: center;
+    transition: all 0.25s ease-out;
+}
+li.active-pagination{
+    transform: scale(3);
+}
+.scroll-tab{
+    position:fixed;
+    width: 100vw;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--edge-spacing);
+}
+.scroll-text{
+    position: relative;
+    color: whitesmoke;
+    font-size: 1.2rem;
+}
+.scroll-text::after{
+    position:absolute;
+    content:'';
+    width: 100%;
+    background-color: whitesmoke;
+    height: 3px;
+    bottom: -5px;
+    left:0;
+}
+.background{
+    position: fixed;
+    z-index: -1;
+}
+.shadow{
+    position: fixed;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(circle at 50%, transparent 5%, #000000 60%),
+    linear-gradient(to bottom, rgba(0,0,0,0.7) 20%,rgba(0,0,0,0.4) 35%, transparent 50%,rgba(0,0,0,0.4) 65%, rgba(0,0,0,0.7) 100%);
+}
