@@ -13,17 +13,23 @@ header, .pagination, .drawer, .scroll-tab{
     z-index: 2;
 }
 header{
-    height: var(--nav-bar-height);
     width: 100%;
     position: fixed;
     color: whitesmoke;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: calc(var(--edge-spacing) / 2);
 }
 header > h1{
-    font-size: 2rem;
+    font-family: 'Black Ops One';
+    font-size: 3rem;
     font-weight: 300;
+    line-height: 2.2rem;
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+}
+.header-hidden{
+    opacity: 0;
 }
 section{
     height: 100vh;
@@ -109,22 +115,57 @@ li.active-pagination{
     width: 100vw;
     bottom: 0px;
     display: flex;
-    justify-content: center;
-    padding-bottom: var(--edge-spacing);
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: calc(var(--edge-spacing) / 2 - 1rem - 0.75rem);
 }
 .scroll-text{
-    position: relative;
     color: whitesmoke;
     font-size: 1.2rem;
+    margin: 1rem 0;
 }
-.scroll-text::after{
-    position:absolute;
-    content:'';
-    width: 100%;
-    background-color: whitesmoke;
-    height: 3px;
-    bottom: -5px;
-    left:0;
+.scroll-container{
+    padding: 0 25px;
+}
+.scroll-container:hover > .arrow-down{
+    animation-play-state: running;
+}
+.scroll-container:hover > .arrow-up{
+    animation-play-state: running;
+}
+.scroll-arrow{
+    cursor: pointer;
+    border-left: 1.5rem solid transparent;
+    border-right: 1.5rem solid transparent; 
+    transition: border 0.25s ease-out;
+
+    /* hover and mobile state styling */
+    outline: none;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+.arrow-up{
+    border-bottom: 0.75rem solid whitesmoke;
+    animation: pulseUp 1s ease-out infinite;
+    animation-play-state: paused;
+}
+.arrow-up:hover{
+    border-bottom: 0.75rem solid slategray;
+}
+.arrow-down{
+    border-top: 0.75rem solid whitesmoke;
+    animation: pulseDown 1s ease-out infinite;
+    animation-play-state: paused;
+}
+.arrow-down:hover{
+    border-top: 0.75rem solid slategray;
+}
+@keyframes pulseUp{
+    0%, 100%{ transform: translateY(0);}
+    50% { transform: translateY(-5px);}
+}
+@keyframes pulseDown{
+    0%, 100%{ transform: translateY(0);}
+    50% { transform: translateY(5px);}
 }
 .background{
     position: fixed;
@@ -151,7 +192,8 @@ li.active-pagination{
     line-height: calc(var(--typo-h1-size) - 2rem);
 }
 
-.typo-slide > h2 {
+.typo-slide > h2 , .content-slide > h2{
+    text-transform: uppercase;
     font-weight: 300;
     font-size: 3rem;
 }
@@ -159,4 +201,21 @@ li.active-pagination{
 .typo-slide > h3 {
     font-weight: 300;
     font-size: 1.5rem;
+}
+
+.content-slide ol{
+    list-style-type: none;
+    counter-reset: trackNumber;
+}
+.content-slide li{
+    padding: 5px 0 0 0;
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    font-size: 1.1rem;
+}
+.content-slide li::before{
+    color: slategray;
+    font-family: 'Black Ops One';
+    counter-increment: trackNumber;
+    content: counter(trackNumber);
 }

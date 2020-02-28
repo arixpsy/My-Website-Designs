@@ -54,7 +54,8 @@ function animate () {
 
 init();
 animate();
-
+// for debug three.js inspector
+window.scene = scene;
 
 
 let currentSlide = 0;
@@ -62,6 +63,14 @@ let lastSlide = document.querySelectorAll(".slide").length - 1;
 let scrolling = false;
 let slideTransitionTime = 1000;
 
+function showHeader(){
+    let header = document.querySelector("header h1");
+    if(currentSlide == 0){
+        header.classList.add('header-hidden');
+    }else{
+        header.classList.remove('header-hidden');
+    }
+}
 function nextSlide(){
     if(currentSlide != lastSlide){
         let slideDeck = document.querySelectorAll(".slide");
@@ -73,6 +82,7 @@ function nextSlide(){
         paginationDeck[currentSlide + 1].classList.add("active-pagination");
         
         currentSlide++;
+        showHeader();
     }
 }
 
@@ -87,6 +97,7 @@ function previousSlide(){
         paginationDeck[currentSlide - 1].classList.add("active-pagination");
 
         currentSlide--;
+        showHeader();
     }
 }
 function slideTransitionLock(){

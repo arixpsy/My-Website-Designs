@@ -12,13 +12,13 @@
 <body>
     <div class="container">
         <div class="background" id="background">
-
+            <!-- three.js background scene-->
         </div>
         <div class="shadow">
-
+            <!-- shadow effect -->
         </div>
         <header>
-            <h1>BTS</h1>
+            <h1 class="header-hidden">BTS</h1>
         </header>
         <div class="drawer">
             <div class="drawer-icon">
@@ -32,23 +32,51 @@
                 <li class="active-pagination"></li>
                 <li></li>
                 <li></li>
+                <li></li>
             </ul>
         </div>
         <div class="scroll-tab">
-            <div>arrow up</div>
-            <div class="scroll-text">Scroll</div>
-            <div>arrow down</div>
+            <div class="scroll-container">
+                <div class="scroll-arrow arrow-up" onclick="previousSlide()"></div>
+                <div class="scroll-text">Scroll</div>
+                <div class="scroll-arrow arrow-down" onclick="nextSlide()"></div>
+            </div>
         </div>
         <section class="slide typo-slide">
             <h1>BTS</h1>
             <h2>Map of the soul 7</h1>
             <h3>4th full-length album</h2>
         </section>
-        <section class="slide slide-down">
-            <h1>COMEBACK MAP</h1>
+        <section class="slide content-slide slide-down">
+            <h2>COMEBACK MAP</h2>
         </section>
-        <section class="slide slide-down">
-            <h1>TRACK LIST</h1>
+        <section class="slide content-slide slide-down">
+            <h2>TRACK LIST</h2>
+            <ol>
+                <li>Intro : Persona</li>
+                <li>Boy With Luv (Feat. Halsey)</li>
+                <li>Make It Right</li>
+                <li>Jamais Vu</li>
+                <li>Dionysus </li>
+                <li>Interlude : Shadow </li>
+                <li>Black Swan</li>
+                <li>Filter</li>
+                <li>My Time</li>
+                <li>Louder than bombs</li>
+                <li>ON</li>
+                <li>UGH!</li>
+                <li>00:00 (Zero O’Clock)</li>
+                <li>Inner Child</li>
+                <li>Friends</li>
+                <li>Moon</li>
+                <li>Respect</li>
+                <li>We are Bulletproof: the Eternal</li>
+                <li>Outro: Ego</li>
+            </ol>
+            
+        </section>
+        <section class="slide content-slide slide-down">
+            <iframe src="https://open.spotify.com/embed/album/6mJZTV8lCqnwftYZa94bXS" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </section>
     </div>
 </body>
@@ -56,8 +84,7 @@
 
 <!-- 
     TODO:
-    pagination onclick slide
-    scroll arrow up down + animation hover
+    pagination click
     drawer animation
     content layout and design
     three.js triangle particles
