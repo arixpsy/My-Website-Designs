@@ -23,24 +23,30 @@ function init(){
 }
 
 function createParticles(){
-    // particles = new THREE.Group();
+    particles = new THREE.Group();
+    let doubleSideMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, side: THREE.DoubleSide} );
+    for (let i = 0; i < 100; i ++) {
+        let geom = new THREE.Geometry();
+        let v1 = new THREE.Vector3(0,0,0);
+        let v2 = new THREE.Vector3(Math.random() * 50,0,0);
+        let v3 = new THREE.Vector3(Math.random() * 50,Math.random() * 50,0);
+
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+
+        geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
+        geom.computeFaceNormals();
+        let mesh= new THREE.Mesh( geom, doubleSideMaterial);
+        mesh.position.set((Math.random() - 0.5) * 1000,
+                      (Math.random() - 0.5) * 1000,
+                      (Math.random() - 0.5) * 1000);
+
+        particles.add( mesh);
+    }
     
-    // scene.add(particles);
-    var geom = new THREE.Geometry();
-    var v1 = new THREE.Vector3(0,0,0);
-    var v2 = new THREE.Vector3(15,0,0);
-    var v3 = new THREE.Vector3(15,15,0);
-
-    geom.vertices.push(v1);
-    geom.vertices.push(v2);
-    geom.vertices.push(v3);
-
-    geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
-    geom.computeFaceNormals();
-
-    var mesh= new THREE.Mesh( geom, new THREE.MeshNormalMaterial() );
-    mesh.position.z = 300;
-    // scene.add( mesh);
+    scene.add(particles);
+    
 }
 
 function animate () {
@@ -48,6 +54,8 @@ function animate () {
 
     cube.rotation.x += 0.005;
     cube.rotation.y += 0.005;
+    particles.rotation.x += 0.0006;
+    particles.rotation.y -= 0.0001;
 
     renderer.render( scene, camera);
 };
