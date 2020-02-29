@@ -42,7 +42,10 @@ section{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    transition: transform 1s cubic-bezier(0.22, 0.44, 0, 1);
+    transition: transform 1s cubic-bezier(0.22, 0.44, 0, 1), opacity 0.25s ease-out;
+}
+.slide-hide{
+    opacity: 0;
 }
 .slide-up{
     transform: translateY(-100vh);
@@ -120,17 +123,45 @@ section{
     justify-content: space-between;
     align-items: flex-end;
     padding: 10px 0px;
+    cursor: pointer;
 }
 .drawer-icon span{
     height: 3px;
     width: 75%;
     background-color: whitesmoke;
+    transition: all 0.25s ease-out;
 }
 .drawer-icon span:first-child, .drawer-icon span:last-child{
     width: 100%;
+    transform-origin: right;
 }
-.drawer-icon:hover{
-    
+
+#navToggle:not(:checked) + .drawer-icon:hover > span{
+    animation: drawerAnimation 0.4s ease-out infinite alternate-reverse;
+}
+
+#navToggle:not(:checked) + .drawer-icon:hover > span:first-child, #navToggle:not(:checked) + .drawer-icon:hover > span:last-child{
+    animation: drawerAnimation 0.4s ease-out infinite alternate;
+}
+
+#navToggle:checked + .drawer-icon span{
+    opacity: 0;
+}
+#navToggle:checked + .drawer-icon span:first-child{
+    opacity: 1;
+    transform: rotate(-32deg);
+}
+#navToggle:checked + .drawer-icon span:last-child{
+    opacity: 1;
+    transform: rotate(32deg);
+}
+@keyframes drawerAnimation{
+    from{
+        width: 100%;
+    }
+    to{
+        width: 75%;
+    }
 }
 .pagination{
     position: fixed;
@@ -139,6 +170,7 @@ section{
     display: flex;
     align-items: center;
     padding-right: var(--edge-spacing);
+    transition: opacity 0.25s ease-out;
 }
 .pagination ul{
     list-style-type: none;
@@ -167,6 +199,7 @@ li.active-pagination{
     flex-direction: column;
     align-items: center;
     padding-bottom: calc(var(--edge-spacing) / 2 - 1rem - 0.75rem);
+    transition: opacity 0.25s ease-out;
 }
 .scroll-text{
     color: whitesmoke;
@@ -227,8 +260,11 @@ li.active-pagination{
     width: 100%;
     background: radial-gradient(circle at 50%, transparent 5%, #000000 60%),
     linear-gradient(to bottom, rgba(0,0,0,0.7) 20%,rgba(0,0,0,0.4) 35%, transparent 50%,rgba(0,0,0,0.4) 65%, rgba(0,0,0,0.7) 100%);
+    transition: transform ease-out 0.15s;
 }
-
+.shadow-expand{
+    transform: scale(3);
+}
 .typo-slide{
     text-transform: uppercase;
 }
@@ -271,6 +307,36 @@ li.active-pagination{
     content: counter(trackNumber);
 }
 
+.navbar{
+    width: max-content;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-left: calc(var(--edge-spacing) + 15vw);
+    font-size: 6rem;
+    overflow: hidden;
+    z-index: 4;
+}
+.navbar ul{
+    list-style-type: none;
+}
+.navbar li{
+    transform: translateX(-100%);
+}
+
+.navbar.navbar-show li{
+    animation: slide-in 0.25s ease-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slide-in{
+    from{
+        transform: translateX(-100%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}
 @media screen and (max-width: 1000px){
     .pagination{
         display: none;

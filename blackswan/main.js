@@ -77,9 +77,11 @@ let currentSlide = 0;
 let lastSlide = document.querySelectorAll(".slide").length - 1;
 let scrolling = false;
 let slideTransitionTime = 1000;
+let slideDeck = document.querySelectorAll(".slide");
+let paginationDeck = document.querySelectorAll(".pagination ul li");
+let header = document.querySelector("header h1");
 
 function showHeader(){
-    let header = document.querySelector("header h1");
     if(currentSlide == 0){
         header.classList.add('header-hidden');
     }else{
@@ -88,11 +90,9 @@ function showHeader(){
 }
 function nextSlide(){
     if(currentSlide != lastSlide){
-        let slideDeck = document.querySelectorAll(".slide");
         slideDeck[currentSlide].classList.add("slide-up");
         slideDeck[currentSlide + 1].classList.remove("slide-down");
         
-        let paginationDeck = document.querySelectorAll(".pagination ul li");
         paginationDeck[currentSlide].classList.remove("active-pagination");
         paginationDeck[currentSlide + 1].classList.add("active-pagination");
         
@@ -103,11 +103,9 @@ function nextSlide(){
 
 function previousSlide(){
     if(currentSlide != 0){
-        let slideDeck = document.querySelectorAll(".slide");
         slideDeck[currentSlide].classList.add("slide-down");
         slideDeck[currentSlide - 1].classList.remove("slide-up");
-
-        let paginationDeck = document.querySelectorAll(".pagination ul li");
+        
         paginationDeck[currentSlide].classList.remove("active-pagination");
         paginationDeck[currentSlide - 1].classList.add("active-pagination");
 
@@ -135,7 +133,7 @@ window.addEventListener('wheel', (event)=>{
         delta = -1 *event.deltaY;
     }
 
-    if (scrolling != true){
+    if (scrolling != true && !navToggle.checked){
         if (delta <= -50){
             scrolling = true;
             nextSlide();
@@ -185,3 +183,32 @@ setInterval(()=>{
     }
 }, cardVisibleTime);
 
+// navbar Animation
+
+let navToggle = document.querySelector("input[id=navToggle]");
+let shadow = document.querySelector(".shadow");
+let pagination = document.querySelector(".pagination");
+let scrollTab = document.querySelector(".scroll-tab");
+let navbar = document.querySelector(".navbar");
+
+navToggle.addEventListener("change", ()=>{
+    if(navToggle.checked) {
+        shadow.classList.add("shadow-expand");
+        for(let i = 0; i <= lastSlide; i++){
+            slideDeck[i].classList.add("slide-hide");
+        }
+        pagination.classList.add("slide-hide");
+        scrollTab.classList.add("slide-hide");
+        header.classList.add("slide-hide");
+        navbar.classList.add("navbar-show");
+    } else {
+        shadow.classList.remove("shadow-expand");
+        for(let i = 0; i <= lastSlide; i++){
+            slideDeck[i].classList.remove("slide-hide");
+        }
+        pagination.classList.remove("slide-hide");
+        scrollTab.classList.remove("slide-hide");
+        header.classList.remove("slide-hide");
+        navbar.classList.remove("navbar-show");
+    }
+})
