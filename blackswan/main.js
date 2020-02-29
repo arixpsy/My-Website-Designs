@@ -28,8 +28,8 @@ function createParticles(){
     for (let i = 0; i < 100; i ++) {
         let geom = new THREE.Geometry();
         let v1 = new THREE.Vector3(0,0,0);
-        let v2 = new THREE.Vector3(Math.random() * 50,0,0);
-        let v3 = new THREE.Vector3(Math.random() * 50,Math.random() * 50,0);
+        let v2 = new THREE.Vector3(Math.random() * 80,0,0);
+        let v3 = new THREE.Vector3(Math.random() * 80, Math.random() * 80, 0);
 
         geom.vertices.push(v1);
         geom.vertices.push(v2);
@@ -37,16 +37,23 @@ function createParticles(){
 
         geom.faces.push( new THREE.Face3( 0, 1, 2 ) );
         geom.computeFaceNormals();
+        geom.center();
+
         let mesh= new THREE.Mesh( geom, doubleSideMaterial);
         mesh.position.set((Math.random() - 0.5) * 1000,
                       (Math.random() - 0.5) * 1000,
                       (Math.random() - 0.5) * 1000);
-
-        particles.add( mesh);
+        particles.add(mesh);
     }
     
     scene.add(particles);
-    
+}
+
+function rotateIndividualParticle(){
+    for (let i = 0; i < particles.children.length; i ++) {
+        particles.children[i].rotation.y -= 0.0001;
+        particles.children[i].rotation.z += 0.005;
+    }
 }
 
 function animate () {
@@ -56,6 +63,7 @@ function animate () {
     cube.rotation.y += 0.005;
     particles.rotation.x += 0.0006;
     particles.rotation.y -= 0.0001;
+    rotateIndividualParticle();
 
     renderer.render( scene, camera);
 };
