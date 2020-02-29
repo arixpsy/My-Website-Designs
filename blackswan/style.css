@@ -50,6 +50,58 @@ section{
 .slide-down{
     transform: translateY(100vh);
 }
+.card-container{
+    position: relative;
+    margin-top: 5px;
+}
+.fade-card:first-child{
+    position: relative;
+}
+.fade-card{
+    position: absolute;
+    top: 0px;
+    opacity: 0;
+    width: 300px; 
+}
+.fade-card.fade-card-active{
+    opacity: 1;
+    animation: fade-in 1s ease-out
+}
+@keyframes fade-in{
+    from{
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.fade-card > h3{
+    position: relative;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+.fade-card > h3::after{
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left:0;
+    height: 1px;
+    width: 100%;
+    background-color: whitesmoke;
+}
+.fade-card > h4{
+    font-size: 1.3rem;
+    padding-bottom: 0.2rem;
+    
+}
+.fade-card > p{
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+    color: slategray;
+}
 .drawer{
     position: fixed;
     left: 0px;
@@ -94,9 +146,6 @@ section{
     flex-direction: column;
     align-items: center;
     width: 20px;
-}
-.pagination li{
-
 }
 .pagination li{
     height: 5px;
@@ -196,11 +245,13 @@ li.active-pagination{
     text-transform: uppercase;
     font-weight: 300;
     font-size: 3rem;
+    text-align: center;
 }
 
 .typo-slide > h3 {
     font-weight: 300;
     font-size: 1.5rem;
+    color: slategray;
 }
 
 .content-slide ol{
@@ -218,4 +269,13 @@ li.active-pagination{
     font-family: 'Black Ops One';
     counter-increment: trackNumber;
     content: counter(trackNumber);
+}
+
+@media screen and (max-width: 1000px){
+    .pagination{
+        display: none;
+    }
+    .drawer{
+        display: none;
+    }
 }

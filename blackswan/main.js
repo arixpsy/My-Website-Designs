@@ -70,9 +70,8 @@ function animate () {
 
 init();
 animate();
-// for debug three.js inspector
-window.scene = scene;
 
+// Slide Animation
 
 let currentSlide = 0;
 let lastSlide = document.querySelectorAll(".slide").length - 1;
@@ -150,3 +149,39 @@ window.addEventListener('wheel', (event)=>{
         
     }
 });
+
+
+// Card Animation
+let totalCards = document.querySelectorAll(".fade-card").length;
+let currentCard = 0;
+let cardVisibleTime = 7000;
+let containerHover = false;
+
+function nextCard(){
+    let cardDeck = document.querySelectorAll(".fade-card");
+
+    if(currentCard == totalCards - 1){
+        cardDeck[currentCard].classList.remove("fade-card-active");
+        cardDeck[0].classList.add("fade-card-active");
+        currentCard = 0;
+    }else{
+        cardDeck[currentCard].classList.remove("fade-card-active");
+        cardDeck[currentCard + 1].classList.add("fade-card-active");
+        currentCard++;
+    }
+    
+}
+
+document.querySelector(".card-container").addEventListener('mouseover', ()=>{
+    containerHover = true;
+});
+document.querySelector(".card-container").addEventListener('mouseout', ()=>{
+    containerHover = false;
+});
+
+setInterval(()=>{
+    if(!containerHover){
+        nextCard();
+    }
+}, cardVisibleTime);
+
