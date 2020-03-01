@@ -10,7 +10,7 @@
     font-family: 'Quicksand' ;
 }
 header, .pagination, .drawer, .scroll-tab{
-    z-index: 2;
+    z-index: 5;
 }
 header{
     width: 100%;
@@ -112,7 +112,6 @@ section{
     display: flex;
     align-items: center;
     padding-left: var(--edge-spacing);
-    z-index: 5;
 }
 .drawer-icon{
     height: 45px;
@@ -154,6 +153,10 @@ section{
 #navToggle:checked + .drawer-icon span:last-child{
     opacity: 1;
     transform: rotate(32deg);
+}
+
+#navToggle:checked + .drawer-icon:hover span:first-child , #navToggle:checked + .drawer-icon:hover span:last-child{
+    background-color: slategray;
 }
 @keyframes drawerAnimation{
     from{
@@ -316,15 +319,28 @@ li.active-pagination{
     margin-left: calc(var(--edge-spacing) + 15vw);
     font-size: 6rem;
     overflow: hidden;
-    z-index: 4;
+    z-index: -1;
 }
 .navbar ul{
     list-style-type: none;
 }
 .navbar li{
     transform: translateX(-100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to right,slategray 50%,whitesmoke 50%);
+    background-size: 200% 100%;
+    background-position: 100%;
+    cursor: pointer;
 }
-
+.navbar li:hover{
+    background-position: 0%;
+    transition: background-position 0.5s ease-out;
+}
+.navbar.navbar-show{
+    z-index: 5;
+}
 .navbar.navbar-show li{
     animation: slide-in 0.25s ease-out;
     animation-fill-mode: forwards;

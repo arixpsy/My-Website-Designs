@@ -191,7 +191,7 @@ let pagination = document.querySelector(".pagination");
 let scrollTab = document.querySelector(".scroll-tab");
 let navbar = document.querySelector(".navbar");
 
-navToggle.addEventListener("change", ()=>{
+function toggleNavbar(){
     if(navToggle.checked) {
         shadow.classList.add("shadow-expand");
         for(let i = 0; i <= lastSlide; i++){
@@ -211,4 +211,29 @@ navToggle.addEventListener("change", ()=>{
         header.classList.remove("slide-hide");
         navbar.classList.remove("navbar-show");
     }
-})
+}
+
+navToggle.addEventListener("change", toggleNavbar);
+
+function goToSlide(index){
+    navToggle.checked = false;
+    toggleNavbar();
+    
+    if(currentSlide == index){
+        return;
+    }
+    
+    if (currentSlide > index){
+        for(let i = 0; i < currentSlide - index; i++){
+            setTimeout(()=>{
+                previousSlide();
+            }, 200 * i)
+        }
+    }else{
+        for(let i = 0; i < index - currentSlide; i++){
+            setTimeout(()=>{
+                nextSlide();
+            }, 200 * i)
+        }
+    }
+}
