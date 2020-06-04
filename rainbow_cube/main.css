@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section{
+    height: 100vh;
+    width: 100vw;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    color: #A9a9a9;
+}
+h1{
+    font-family: 'Source Code Pro', monospace;
+    text-transform: uppercase;
+}
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    width: 750px;
+}
+
+.grid > div {
+    position: relative;
+    height: 250px;
+    width: 250px;
+    background-color: yellow;
+}
+
+.grid > div::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.grid > div:nth-child(1)::before{
+    background-image: linear-gradient(135deg, #dedede, #949494);
+}
+
+.grid > div:nth-child(2)::before, 
+.grid > div:nth-child(4)::before{
+    background-image: linear-gradient(135deg, #b9b9b9, #6f6f6f);
+}
+
+.grid > div:nth-child(3)::before, 
+.grid > div:nth-child(5)::before,
+.grid > div:nth-child(7)::before{
+    background-image: linear-gradient(135deg, #949494, #4a4a4a);
+}
+
+.grid > div:nth-child(6)::before,
+.grid > div:nth-child(8)::before{
+    background-image: linear-gradient(135deg, #6f6f6f, #252525);
+}
+.grid > div:nth-child(9)::before{
+    background-image: linear-gradient(135deg, #4a4a4a, #000000);
+}
+.grid > div:nth-child(1){ transform-origin: top left; }
+.grid > div:nth-child(2){ transform-origin: top; }
+.grid > div:nth-child(3){ transform-origin: top right; }
+.grid > div:nth-child(4){ transform-origin: left; }
+.grid > div:nth-child(6){ transform-origin: right; }
+.grid > div:nth-child(7){ transform-origin: bottom left; }
+.grid > div:nth-child(8){ transform-origin: bottom; }
+.grid > div:nth-child(9){ transform-origin: bottom right; }
+
+.grid > div:hover{
+    transition: 1s linear all;
+    animation: toblack 0.5s linear 0.5s 1 normal forwards;
+}
+@keyframes toblack{
+    from{
+        background-color: yellow;
+    }
+    to{
+        background-color: black;
+    }
+}
+.grid > div:hover::before{
+    transition: 0.5s ease-out all;
+    opacity: 0;
+}
