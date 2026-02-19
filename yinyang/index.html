@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yin & Yang — Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Bebas+Neue&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Global SVG Filters & Defs -->
+  <svg class="svg-defs" aria-hidden="true">
+    <defs>
+      <!-- Rice paper texture filter -->
+      <filter id="ricePaper" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" seed="2" stitchTiles="stitch" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+        <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blend"/>
+      </filter>
+
+      <!-- Ink bleed filter for brush strokes -->
+      <filter id="inkBleed" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+
+      <!-- Heavier ink bleed for larger elements -->
+      <filter id="inkBleedHeavy" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="5" seed="8" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+
+      <!-- Soft ink wash filter -->
+      <filter id="inkWash" x="-5%" y="-5%" width="110%" height="110%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="12" result="noise"/>
+        <feDisplacementMap in="blur" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+
+      <!-- Clip paths removed — using CSS inset() for straight split -->
+    </defs>
+  </svg>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <svg class="preloader-yy" viewBox="0 0 200 200" width="100" height="100">
+        <circle cx="100" cy="100" r="98" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.2"/>
+        <path d="M100 2 A98 98 0 0 1 100 198 A49 49 0 0 1 100 100 A49 49 0 0 0 100 2Z" fill="#fff" filter="url(#inkBleed)"/>
+        <circle cx="100" cy="51" r="14" fill="#000"/>
+        <circle cx="100" cy="149" r="14" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 40 40" width="28" height="28">
+        <path d="M20 0 A20 20 0 0 1 20 40 A10 10 0 0 1 20 20 A10 10 0 0 0 20 0Z" fill="currentColor"/>
+        <circle cx="20" cy="10" r="2.5" fill="var(--inverse)"/>
+        <circle cx="20" cy="30" r="2.5" fill="currentColor"/>
+        <circle cx="20" cy="20" r="19.5" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      </svg>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#philosophy" class="nav-link">Philosophy</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+  </nav>
+
+  <!-- ======== HERO — True Split ======== -->
+  <section class="hero" id="hero">
+    <!-- Black half -->
+    <div class="hero-panel hero-panel--black">
+      <!-- Ink wash mountains on dark side -->
+      <svg class="hero-mountains hero-mountains--dark" viewBox="0 0 800 600" preserveAspectRatio="xMidYMax slice">
+        <g filter="url(#inkWash)" opacity="0.12">
+          <!-- Distant misty mountains -->
+          <path d="M0 600 L0 380 Q50 340 100 360 Q180 300 250 320 Q300 280 350 300 Q400 260 450 290 Q500 250 550 280 Q620 240 700 270 Q750 250 800 280 L800 600 Z" fill="#fff"/>
+          <!-- Mid-ground mountains -->
+          <path d="M0 600 L0 430 Q80 380 150 410 Q200 360 280 390 Q360 350 420 380 Q500 340 580 370 Q650 330 720 360 Q770 340 800 360 L800 600 Z" fill="#fff" opacity="0.7"/>
+          <!-- Foreground mountain -->
+          <path d="M0 600 L0 480 Q100 440 200 470 Q300 430 400 460 Q500 420 600 450 Q700 430 800 450 L800 600 Z" fill="#fff" opacity="0.4"/>
+        </g>
+        <!-- Ink mist layers -->
+        <g filter="url(#inkBleedHeavy)" opacity="0.06">
+          <ellipse cx="200" cy="420" rx="250" ry="30" fill="#fff"/>
+          <ellipse cx="600" cy="350" rx="200" ry="25" fill="#fff"/>
+          <ellipse cx="400" cy="480" rx="300" ry="20" fill="#fff"/>
+        </g>
+      </svg>
+
+      <!-- Bamboo silhouette on dark side -->
+      <svg class="hero-bamboo hero-bamboo--left" viewBox="0 0 120 600" preserveAspectRatio="xMinYMax slice">
+        <g filter="url(#inkBleed)" opacity="0.08">
+          <!-- Bamboo stalk 1 -->
+          <path d="M30 600 Q28 500 32 400 Q30 350 33 300 Q31 200 35 100 Q34 50 36 0" fill="none" stroke="#fff" stroke-width="3"/>
+          <!-- Bamboo nodes -->
+          <ellipse cx="31" cy="400" rx="5" ry="2" fill="#fff"/>
+          <ellipse cx="32" cy="300" rx="5" ry="2" fill="#fff"/>
+          <ellipse cx="34" cy="200" rx="4" ry="2" fill="#fff"/>
+          <!-- Bamboo leaves -->
+          <path d="M32 380 Q10 360 5 340" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M32 375 Q8 370 0 355" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+          <path d="M33 280 Q12 265 8 250" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M33 275 Q15 275 5 260" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+          <path d="M34 180 Q55 165 65 145" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M34 175 Q58 172 70 155" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+          <!-- Bamboo stalk 2 -->
+          <path d="M60 600 Q58 480 62 360 Q60 280 64 200 Q63 140 65 80" fill="none" stroke="#fff" stroke-width="2.5"/>
+          <ellipse cx="61" cy="360" rx="4" ry="2" fill="#fff"/>
+          <ellipse cx="63" cy="260" rx="4" ry="2" fill="#fff"/>
+          <path d="M62 340 Q80 325 90 305" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M62 335 Q85 330 95 315" fill="none" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+          <path d="M63 240 Q45 225 35 210" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+        </g>
+      </svg>
+
+      <div class="hero-panel-content">
+        <p class="hero-role">Creative Developer & Designer</p>
+        <h1 class="hero-title">
+          <span class="hero-title-line"><span class="word">Design</span></span>
+          <span class="hero-title-line"><span class="word">&</span> <span class="word word--outline">Code</span></span>
+        </h1>
+        <p class="hero-desc">Crafting digital experiences at the intersection of contrast — where opposing forces create harmony.</p>
+        <div class="hero-actions">
+          <a href="#work" class="hero-btn">
+            <span>View Work</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8l6 6 6-6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- White half -->
+    <div class="hero-panel hero-panel--white">
+      <!-- Ink wash mountains on light side -->
+      <svg class="hero-mountains hero-mountains--light" viewBox="0 0 800 600" preserveAspectRatio="xMidYMax slice">
+        <g filter="url(#inkWash)" opacity="0.07">
+          <path d="M0 600 L0 380 Q50 340 100 360 Q180 300 250 320 Q300 280 350 300 Q400 260 450 290 Q500 250 550 280 Q620 240 700 270 Q750 250 800 280 L800 600 Z" fill="#000"/>
+          <path d="M0 600 L0 430 Q80 380 150 410 Q200 360 280 390 Q360 350 420 380 Q500 340 580 370 Q650 330 720 360 Q770 340 800 360 L800 600 Z" fill="#000" opacity="0.6"/>
+          <path d="M0 600 L0 480 Q100 440 200 470 Q300 430 400 460 Q500 420 600 450 Q700 430 800 450 L800 600 Z" fill="#000" opacity="0.3"/>
+        </g>
+        <g filter="url(#inkBleedHeavy)" opacity="0.04">
+          <ellipse cx="200" cy="420" rx="250" ry="30" fill="#000"/>
+          <ellipse cx="600" cy="350" rx="200" ry="25" fill="#000"/>
+        </g>
+      </svg>
+
+      <!-- Bamboo silhouette on light side -->
+      <svg class="hero-bamboo hero-bamboo--right" viewBox="0 0 120 600" preserveAspectRatio="xMaxYMax slice">
+        <g filter="url(#inkBleed)" opacity="0.06">
+          <path d="M80 600 Q78 480 82 360 Q80 280 84 160 Q83 100 85 20" fill="none" stroke="#000" stroke-width="3"/>
+          <ellipse cx="81" cy="360" rx="5" ry="2" fill="#000"/>
+          <ellipse cx="83" cy="240" rx="4" ry="2" fill="#000"/>
+          <path d="M82 340 Q60 320 52 300" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M82 335 Q55 330 48 310" fill="none" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+          <path d="M83 220 Q105 205 115 185" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M83 215 Q108 212 118 195" fill="none" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+          <!-- Cherry blossom branch -->
+          <path d="M84 140 Q100 120 110 95 Q115 75 108 55" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="110" cy="95" r="3" fill="#000" opacity="0.08"/>
+          <circle cx="108" cy="58" r="2.5" fill="#000" opacity="0.06"/>
+          <circle cx="105" cy="78" r="2" fill="#000" opacity="0.05"/>
+        </g>
+      </svg>
+
+      <div class="hero-panel-content">
+        <p class="hero-role">Creative Developer & Designer</p>
+        <h1 class="hero-title">
+          <span class="hero-title-line"><span class="word">Design</span></span>
+          <span class="hero-title-line"><span class="word">&</span> <span class="word word--outline">Code</span></span>
+        </h1>
+        <p class="hero-desc">Crafting digital experiences at the intersection of contrast — where opposing forces create harmony.</p>
+        <div class="hero-actions">
+          <a href="#work" class="hero-btn">
+            <span>View Work</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8l6 6 6-6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- The S-curve divider — now with ink bleed -->
+    <div class="hero-curve" id="heroCurve">
+      <svg viewBox="0 0 200 1000" preserveAspectRatio="none">
+        <path id="curvePath" d="M100 0 C150 200, 50 300, 100 500 C150 700, 50 800, 100 1000" fill="none" stroke="rgba(128,128,128,0.15)" stroke-width="1" filter="url(#inkBleed)"/>
+      </svg>
+    </div>
+
+    <!-- Large yin-yang at center -->
+    <div class="hero-symbol" id="heroSymbol">
+      <svg viewBox="0 0 200 200" width="140" height="140">
+        <defs>
+          <clipPath id="leftClip"><rect x="0" y="0" width="100" height="200"/></clipPath>
+          <clipPath id="rightClip"><rect x="100" y="0" width="100" height="200"/></clipPath>
+        </defs>
+        <g clip-path="url(#leftClip)">
+          <circle cx="100" cy="100" r="98" fill="none" stroke="#fff" stroke-width="0.5"/>
+          <path d="M100 2 A98 98 0 0 1 100 198 A49 49 0 0 1 100 100 A49 49 0 0 0 100 2Z" fill="#fff" filter="url(#inkBleed)"/>
+          <circle cx="100" cy="51" r="12" fill="#000"/>
+          <circle cx="100" cy="149" r="12" fill="#fff"/>
+        </g>
+        <g clip-path="url(#rightClip)">
+          <circle cx="100" cy="100" r="98" fill="none" stroke="#000" stroke-width="0.5"/>
+          <path d="M100 2 A98 98 0 0 1 100 198 A49 49 0 0 1 100 100 A49 49 0 0 0 100 2Z" fill="#000" opacity="0.08"/>
+          <path d="M100 2 A98 98 0 0 0 100 198 A49 49 0 0 0 100 100 A49 49 0 0 1 100 2Z" fill="#000" filter="url(#inkBleed)"/>
+          <circle cx="100" cy="51" r="12" fill="#000"/>
+          <circle cx="100" cy="149" r="12" fill="#fff"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero-scroll">
+      <span class="hero-scroll-text">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+
+    <!-- Ink splatter accents -->
+    <svg class="ink-splatter ink-splatter--1" viewBox="0 0 100 100" aria-hidden="true">
+      <g filter="url(#inkBleedHeavy)">
+        <circle cx="50" cy="50" r="20" fill="#fff" opacity="0.03"/>
+        <circle cx="55" cy="45" r="8" fill="#fff" opacity="0.04"/>
+        <circle cx="40" cy="58" r="5" fill="#fff" opacity="0.02"/>
+        <circle cx="62" cy="55" r="3" fill="#fff" opacity="0.03"/>
+      </g>
+    </svg>
+    <svg class="ink-splatter ink-splatter--2" viewBox="0 0 80 80" aria-hidden="true">
+      <g filter="url(#inkBleedHeavy)">
+        <circle cx="40" cy="40" r="15" fill="#000" opacity="0.03"/>
+        <circle cx="35" cy="35" r="6" fill="#000" opacity="0.04"/>
+        <circle cx="50" cy="48" r="4" fill="#000" opacity="0.02"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- ======== WORK — Dark Section ======== -->
+  <section class="section section--dark" id="work">
+    <!-- Ink wash decoration -->
+    <svg class="section-ink section-ink--top" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 80 Q100 40 200 60 Q350 20 500 50 Q650 10 800 45 Q950 15 1100 40 Q1150 30 1200 35 L1200 0 L0 0 Z" fill="#fff" opacity="0.03" filter="url(#inkBleedHeavy)"/>
+    </svg>
+
+    <div class="section-inner">
+      <div class="section-header" data-reveal>
+        <div class="section-label">
+          <span class="section-num">01</span>
+          <span class="section-line"></span>
+          <span class="section-tag">Selected Work</span>
+        </div>
+        <h2 class="section-title">Projects</h2>
+      </div>
+
+      <div class="work-grid">
+        <article class="work-item work-item--full" data-reveal>
+          <div class="work-visual">
+            <div class="work-img">
+              <svg viewBox="0 0 800 400" class="work-art">
+                <rect width="800" height="400" fill="#0a0a0a"/>
+                <!-- Ink wash landscape -->
+                <g filter="url(#inkWash)" opacity="0.15">
+                  <path d="M0 400 L0 280 Q100 220 200 260 Q300 200 400 240 Q500 180 600 230 Q700 190 800 220 L800 400Z" fill="#fff"/>
+                  <path d="M0 400 L0 320 Q150 280 300 310 Q450 270 600 300 Q700 280 800 290 L800 400Z" fill="#fff" opacity="0.5"/>
+                </g>
+                <g filter="url(#inkBleedHeavy)" opacity="0.06">
+                  <ellipse cx="300" cy="300" rx="150" ry="15" fill="#fff"/>
+                  <ellipse cx="600" cy="260" rx="120" ry="12" fill="#fff"/>
+                </g>
+                <circle cx="650" cy="100" r="40" fill="#fff" opacity="0.04" filter="url(#inkBleed)"/>
+              </svg>
+            </div>
+            <div class="work-overlay">
+              <span class="work-view">View Project</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">Brand Identity / Web</span>
+            <h3 class="work-name">Ecliptica</h3>
+            <p class="work-desc">A luxury skincare brand identity built on the tension between scientific precision and natural beauty.</p>
+          </div>
+        </article>
+
+        <article class="work-item" data-reveal>
+          <div class="work-visual">
+            <div class="work-img">
+              <svg viewBox="0 0 400 320" class="work-art">
+                <rect width="400" height="320" fill="#0a0a0a"/>
+                <!-- Ink bamboo -->
+                <g filter="url(#inkBleed)" opacity="0.12">
+                  <path d="M120 320 Q118 240 122 160 Q120 100 124 40 Q123 20 125 0" fill="none" stroke="#fff" stroke-width="2.5"/>
+                  <ellipse cx="121" cy="160" rx="4" ry="1.5" fill="#fff"/>
+                  <ellipse cx="123" cy="100" rx="3.5" ry="1.5" fill="#fff"/>
+                  <path d="M122 145 Q100 130 90 110" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+                  <path d="M122 140 Q95 138 85 120" fill="none" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+                  <path d="M123 85 Q145 70 155 48" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+                  <path d="M160 320 Q158 220 162 120 Q161 70 163 10" fill="none" stroke="#fff" stroke-width="2"/>
+                  <ellipse cx="161" cy="200" rx="3.5" ry="1.5" fill="#fff"/>
+                  <path d="M162 180 Q180 165 190 145" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+            <div class="work-overlay">
+              <span class="work-view">View Project</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">UI/UX / Development</span>
+            <h3 class="work-name">Monolith</h3>
+            <p class="work-desc">A minimalist project management tool that strips away noise to reveal what matters.</p>
+          </div>
+        </article>
+
+        <article class="work-item" data-reveal>
+          <div class="work-visual">
+            <div class="work-img">
+              <svg viewBox="0 0 400 320" class="work-art">
+                <rect width="400" height="320" fill="#0a0a0a"/>
+                <!-- Ink wash flowing water -->
+                <g filter="url(#inkWash)" opacity="0.1">
+                  <path d="M0 200 Q60 170 120 195 Q180 220 240 185 Q300 150 360 180 Q400 200 400 200" fill="none" stroke="#fff" stroke-width="2"/>
+                  <path d="M0 230 Q80 200 160 225 Q240 250 320 215 Q380 190 400 200" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+                  <path d="M0 260 Q100 240 200 255 Q300 270 400 245" fill="none" stroke="#fff" stroke-width="1" opacity="0.3"/>
+                </g>
+                <!-- Moon -->
+                <circle cx="320" cy="80" r="35" fill="#fff" opacity="0.04" filter="url(#inkBleed)"/>
+                <circle cx="325" cy="75" r="30" fill="#0a0a0a" opacity="0.8"/>
+              </svg>
+            </div>
+            <div class="work-overlay">
+              <span class="work-view">View Project</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">Motion / Interactive</span>
+            <h3 class="work-name">Duality</h3>
+            <p class="work-desc">An interactive art installation exploring the boundary between digital and physical space.</p>
+          </div>
+        </article>
+
+        <article class="work-item work-item--full" data-reveal>
+          <div class="work-visual">
+            <div class="work-img">
+              <svg viewBox="0 0 800 350" class="work-art">
+                <rect width="800" height="350" fill="#0a0a0a"/>
+                <!-- Distant mountains in ink wash style -->
+                <g filter="url(#inkWash)" opacity="0.1">
+                  <path d="M0 350 L0 200 Q60 160 120 190 Q200 140 280 180 Q380 120 480 160 Q560 110 640 150 Q720 120 800 140 L800 350Z" fill="#fff"/>
+                </g>
+                <g filter="url(#inkBleedHeavy)" opacity="0.04">
+                  <ellipse cx="200" cy="240" rx="180" ry="15" fill="#fff"/>
+                  <ellipse cx="550" cy="200" rx="160" ry="12" fill="#fff"/>
+                </g>
+                <!-- Flying birds (ink brush style) -->
+                <g opacity="0.08" filter="url(#inkBleed)">
+                  <path d="M300 100 Q305 95 315 98 Q310 95 305 90" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+                  <path d="M340 85 Q345 80 355 83 Q350 80 345 75" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+                  <path d="M320 115 Q325 110 335 113 Q330 110 325 105" fill="none" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+                  <path d="M365 95 Q370 90 380 93 Q375 90 370 85" fill="none" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+            <div class="work-overlay">
+              <span class="work-view">View Project</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <span class="work-cat">E-Commerce / Full Stack</span>
+            <h3 class="work-name">Penumbra Store</h3>
+            <p class="work-desc">A high-end e-commerce experience for a fashion label that lives between shadow and light.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== Section divider — Ink wash mountain ridge ======== -->
+  <div class="ink-divider">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0 120 L0 80 Q120 30 240 60 Q360 10 480 50 Q600 0 720 40 Q840 5 960 35 Q1080 10 1200 45 Q1320 20 1440 30 L1440 120Z" fill="var(--black)" filter="url(#inkBleedHeavy)"/>
+    </svg>
+  </div>
+
+  <!-- ======== ABOUT — Light Section ======== -->
+  <section class="section section--light" id="about">
+    <!-- Decorative bamboo branch on right -->
+    <svg class="about-branch" viewBox="0 0 200 800" aria-hidden="true">
+      <g filter="url(#inkBleed)" opacity="0.04">
+        <path d="M180 0 Q170 80 175 160 Q165 240 170 320 Q160 400 165 480 Q155 560 160 640 Q150 720 155 800" fill="none" stroke="#000" stroke-width="3"/>
+        <ellipse cx="172" cy="160" rx="5" ry="2" fill="#000"/>
+        <ellipse cx="167" cy="320" rx="5" ry="2" fill="#000"/>
+        <ellipse cx="162" cy="480" rx="5" ry="2" fill="#000"/>
+        <path d="M175 140 Q150 120 140 95" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M175 135 Q145 130 135 105" fill="none" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+        <path d="M170 300 Q145 285 135 260" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M170 295 Q140 292 130 268" fill="none" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+        <path d="M165 460 Q190 445 200 420" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M165 455 Q195 452 205 430" fill="none" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+        <path d="M160 620 Q135 605 125 580" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <div class="section-inner">
+      <div class="about-layout">
+        <div class="about-col about-col--left" data-reveal>
+          <div class="section-label">
+            <span class="section-num">02</span>
+            <span class="section-line"></span>
+            <span class="section-tag">About</span>
+          </div>
+
+          <div class="about-portrait">
+            <div class="portrait-wrap">
+              <svg viewBox="0 0 280 380" class="portrait-art">
+                <rect width="280" height="380" fill="#000" opacity="0.03"/>
+                <!-- Ink wash circular portrait frame -->
+                <circle cx="140" cy="170" r="100" fill="none" stroke="#000" stroke-width="1" opacity="0.06" filter="url(#inkBleed)"/>
+                <circle cx="140" cy="170" r="80" fill="none" stroke="#000" stroke-width="0.5" opacity="0.04" filter="url(#inkBleed)"/>
+                <!-- Mini yin-yang -->
+                <g opacity="0.5">
+                  <path d="M140 90 A40 40 0 0 1 140 250 A20 20 0 0 1 140 170 A20 20 0 0 0 140 90Z" fill="#000" opacity="0.1" filter="url(#inkBleed)"/>
+                  <path d="M140 90 A40 40 0 0 0 140 250 A20 20 0 0 0 140 170 A20 20 0 0 1 140 90Z" fill="#000" opacity="0.03"/>
+                  <circle cx="140" cy="130" r="5" fill="#fff" stroke="#000" stroke-width="0.5"/>
+                  <circle cx="140" cy="210" r="5" fill="#000" opacity="0.15"/>
+                </g>
+                <!-- Ink wash landscape at bottom -->
+                <g filter="url(#inkWash)" opacity="0.06">
+                  <path d="M0 380 L0 310 Q40 280 80 300 Q140 260 200 290 Q240 270 280 280 L280 380Z" fill="#000"/>
+                </g>
+                <text x="140" y="350" text-anchor="middle" fill="#000" font-family="'Bebas Neue', sans-serif" font-size="28" letter-spacing="0.15em" opacity="0.06">PORTFOLIO</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-col about-col--right" data-reveal>
+          <h2 class="about-headline">I believe great design lives in the tension between opposites.</h2>
+          <div class="about-body">
+            <p>For over a decade, I've been crafting digital experiences that embrace duality — where bold meets subtle, where structure meets fluidity, where the familiar meets the unexpected.</p>
+            <p>My practice is rooted in the philosophy of yin and yang: the understanding that contrary forces are interconnected. Every dark interface needs a point of light. Every minimal layout needs a moment of surprise.</p>
+          </div>
+
+          <div class="skills-row">
+            <div class="skill-col">
+              <h4 class="skill-heading">Yin <span>— Design</span></h4>
+              <ul class="skill-list">
+                <li>UI/UX Design</li>
+                <li>Brand Identity</li>
+                <li>Typography</li>
+                <li>Art Direction</li>
+              </ul>
+            </div>
+            <div class="skill-col">
+              <h4 class="skill-heading">Yang <span>— Code</span></h4>
+              <ul class="skill-list">
+                <li>Frontend Dev</li>
+                <li>Creative Coding</li>
+                <li>Motion Design</li>
+                <li>WebGL / Three.js</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== Section divider — Ink wash ridge inverted ======== -->
+  <div class="ink-divider ink-divider--inverted">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0 0 L0 40 Q120 90 240 60 Q360 110 480 70 Q600 120 720 80 Q840 115 960 85 Q1080 110 1200 75 Q1320 100 1440 90 L1440 0Z" fill="var(--black)" filter="url(#inkBleedHeavy)"/>
+    </svg>
+  </div>
+
+  <!-- ======== PHILOSOPHY — Dark Section ======== -->
+  <section class="section section--dark" id="philosophy">
+    <!-- Floating ink mist -->
+    <svg class="section-mist" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true">
+      <g filter="url(#inkBleedHeavy)" opacity="0.04">
+        <ellipse cx="300" cy="100" rx="250" ry="30" fill="#fff"/>
+        <ellipse cx="800" cy="200" rx="300" ry="25" fill="#fff"/>
+        <ellipse cx="500" cy="300" rx="200" ry="20" fill="#fff"/>
+      </g>
+    </svg>
+
+    <div class="section-inner">
+      <div class="section-header section-header--center" data-reveal>
+        <div class="section-label section-label--center">
+          <span class="section-num">03</span>
+          <span class="section-line"></span>
+          <span class="section-tag">Philosophy</span>
+        </div>
+        <h2 class="section-title">Guiding<br>Principles</h2>
+      </div>
+
+      <div class="principles">
+        <div class="principle" data-reveal>
+          <span class="principle-num">I</span>
+          <div class="principle-body">
+            <h3 class="principle-title">Contrast Creates Clarity</h3>
+            <p class="principle-text">Without darkness, light has no meaning. I use contrast — visual, conceptual, emotional — to guide attention and create hierarchy.</p>
+          </div>
+        </div>
+
+        <div class="principle" data-reveal>
+          <span class="principle-num">II</span>
+          <div class="principle-body">
+            <h3 class="principle-title">Balance, Not Symmetry</h3>
+            <p class="principle-text">True balance is dynamic. The confidence to let one element dominate while another recedes — knowing they complete each other.</p>
+          </div>
+        </div>
+
+        <div class="principle" data-reveal>
+          <span class="principle-num">III</span>
+          <div class="principle-body">
+            <h3 class="principle-title">Emptiness Has Weight</h3>
+            <p class="principle-text">Negative space isn't nothing — it's everything. The void gives form its power. I design what's absent with the same care as what's present.</p>
+          </div>
+        </div>
+
+        <div class="principle" data-reveal>
+          <span class="principle-num">IV</span>
+          <div class="principle-body">
+            <h3 class="principle-title">Flow Over Force</h3>
+            <p class="principle-text">The best interfaces feel inevitable. They create natural currents that carry people exactly where they want to go.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== MARQUEE ======== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-word">Design</span>
+      <span class="marquee-sep"></span>
+      <span class="marquee-word">Develop</span>
+      <span class="marquee-sep"></span>
+      <span class="marquee-word">Balance</span>
+      <span class="marquee-sep"></span>
+      <span class="marquee-word">Harmonize</span>
+      <span class="marquee-sep"></span>
+      <span class="marquee-word">Design</span>
+      <span class="marquee-sep"></span>
+      <span class="marquee-word">Develop</span>
+      <span class="marquee-sep"></span>
+      <span class="marquee-word">Balance</span>
+      <span class="marquee-sep"></span>
+      <span class="marquee-word">Harmonize</span>
+      <span class="marquee-sep"></span>
+    </div>
+  </div>
+
+  <!-- ======== CONTACT ======== -->
+  <section class="section section--contact" id="contact">
+    <div class="contact-block">
+      <!-- Ink mountains in contact -->
+      <svg class="contact-mountains" viewBox="0 0 600 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <g filter="url(#inkWash)" opacity="0.08">
+          <path d="M0 400 L0 260 Q80 220 160 250 Q240 200 320 230 Q400 190 480 220 Q540 200 600 210 L600 400Z" fill="#fff"/>
+          <path d="M0 400 L0 310 Q100 280 200 300 Q300 270 400 290 Q500 270 600 280 L600 400Z" fill="#fff" opacity="0.5"/>
+        </g>
+      </svg>
+
+      <div class="contact-inner contact-inner--centered" data-reveal>
+        <div class="section-label">
+          <span class="section-num">04</span>
+          <span class="section-line"></span>
+          <span class="section-tag">Connect</span>
+        </div>
+        <h2 class="contact-title">Let's Connect</h2>
+        <p class="contact-text">Find me on social media — always open to new conversations, collaborations, and creative opportunities.</p>
+        <div class="contact-socials">
+          <a href="#" class="social-link">Twitter</a>
+          <a href="#" class="social-link">Dribbble</a>
+          <a href="#" class="social-link">GitHub</a>
+          <a href="#" class="social-link">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <svg viewBox="0 0 40 40" width="20" height="20">
+          <path d="M20 0 A20 20 0 0 1 20 40 A10 10 0 0 1 20 20 A10 10 0 0 0 20 0Z" fill="currentColor"/>
+          <circle cx="20" cy="10" r="2.5" fill="#000"/>
+          <circle cx="20" cy="30" r="2.5" fill="#fff"/>
+          <circle cx="20" cy="20" r="19.5" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </svg>
+        <span>&copy; 2026 Yin & Yang</span>
+      </div>
+      <span class="footer-note">Crafted in the balance between light and dark</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
