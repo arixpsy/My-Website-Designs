@@ -719,9 +719,11 @@ button { border: none; background: none; font: inherit; cursor: none; }
     linear-gradient(138deg, #040001 0%, #180008 22%, #3c0014 46%, #780028 66%, #b84825 84%, #d89030 96%, #f0c060 100%);
 }
 
-.work-item:hover .work-img {
-  transform: scale(1.04);
-  filter: grayscale(0);
+@media (min-width: 769px) {
+  .work-item:hover .work-img {
+    transform: scale(1.04);
+    filter: grayscale(0);
+  }
 }
 
 .work-desc {
@@ -1160,6 +1162,16 @@ button { border: none; background: none; font: inherit; cursor: none; }
   .work-grid { grid-template-columns: 1fr; }
   .work-item--full { grid-column: 1; }
   .work-item--full .work-visual { aspect-ratio: 16 / 10; }
+
+  /* -- Work item: scroll-centered activates hover effect -- */
+  .work-item:hover .work-img {
+    transform: none;
+    filter: grayscale(1);
+  }
+  .work-item.is-active .work-img {
+    transform: scale(1.04);
+    filter: grayscale(0);
+  }
 
   /* -- About -- */
   .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }

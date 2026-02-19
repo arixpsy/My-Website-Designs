@@ -114,19 +114,59 @@
     }
   }, { passive: true });
 
-  // ---- Work card tilt ----
-  document.querySelectorAll('.work-item').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
       card.style.transform = `perspective(600px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
+  // ---- Work card tilt (desktop only) ----
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+  if (!mobileQuery.matches) {
+    document.querySelectorAll('.work-item').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(600px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        card.style.transform = 'perspective(600px) rotateY(0) rotateX(0)';
+        setTimeout(() => card.style.transition = '', 500);
+      });
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      card.style.transform = 'perspective(600px) rotateY(0) rotateX(0)';
-      setTimeout(() => card.style.transition = '', 500);
+  }
+
+  // ---- Mobile: scroll-activated work items ----
+  function updateMobileActiveWork() {
+    const items = document.querySelectorAll('.work-item');
+    const centerY = window.innerHeight / 2;
+    let closestItem = null;
+    let closestDist = Infinity;
+
+    items.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        const dist = Math.abs((rect.top + rect.height / 2) - centerY);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestItem = item;
+        }
+      }
     });
+
+    items.forEach(item => item.classList.toggle('is-active', item === closestItem));
+  }
+
+  if (mobileQuery.matches) {
+    updateMobileActiveWork();
+    window.addEventListener('scroll', updateMobileActiveWork, { passive: true });
+  }
+
+  mobileQuery.addEventListener('change', (e) => {
+    if (e.matches) {
+      updateMobileActiveWork();
+      window.addEventListener('scroll', updateMobileActiveWork, { passive: true });
+    } else {
+      document.querySelectorAll('.work-item').forEach(item => item.classList.remove('is-active'));
+    }
   });
 
   // ---- Magnetic buttons ----
