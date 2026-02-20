@@ -950,8 +950,8 @@ button { border: none; background: none; font: inherit; cursor: none; }
 
 .contact-block {
   position: relative;
-  background: var(--black);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
   display: flex;
   align-items: center;
   justify-content: center;
