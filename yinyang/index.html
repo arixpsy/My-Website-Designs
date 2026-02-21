@@ -71,7 +71,7 @@
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#work" class="nav-link">Work</a>
-      <a href="#about" class="nav-link">About</a>
+      <a href="#blog" class="nav-link">Blog</a>
       <a href="#philosophy" class="nav-link">Journey</a>
       <a href="#contact" class="nav-link">Contact</a>
     </div>
@@ -450,8 +450,8 @@
     </svg>
   </div>
 
-  <!-- ======== ABOUT — Dark Section ======== -->
-  <section class="section section--dark" id="about">
+  <!-- ======== BLOG — Dark Section ======== -->
+  <section class="section section--dark" id="blog">
     <!-- Decorative bamboo branch on right -->
     <svg class="about-branch" viewBox="0 0 200 800" aria-hidden="true">
       <g filter="url(#inkBleed)" opacity="0.08">
@@ -470,67 +470,62 @@
     </svg>
 
     <div class="section-inner">
-      <div class="about-layout">
-        <div class="about-col about-col--left" data-reveal>
-          <div class="section-label">
-            <span class="section-num">03</span>
-            <span class="section-line"></span>
-            <span class="section-tag">About</span>
-          </div>
 
-          <div class="about-portrait">
-            <div class="portrait-wrap">
-              <svg viewBox="0 0 280 380" class="portrait-art">
-                <rect width="280" height="380" fill="#fff" opacity="0.03"/>
-                <!-- Ink wash circular portrait frame -->
-                <circle cx="140" cy="170" r="100" fill="none" stroke="#fff" stroke-width="1" opacity="0.12" filter="url(#inkBleed)"/>
-                <circle cx="140" cy="170" r="80" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.08" filter="url(#inkBleed)"/>
-                <!-- Mini yin-yang -->
-                <g opacity="0.5">
-                  <path d="M140 90 A40 40 0 0 1 140 250 A20 20 0 0 1 140 170 A20 20 0 0 0 140 90Z" fill="#fff" opacity="0.1" filter="url(#inkBleed)"/>
-                  <path d="M140 90 A40 40 0 0 0 140 250 A20 20 0 0 0 140 170 A20 20 0 0 1 140 90Z" fill="#fff" opacity="0.03"/>
-                  <circle cx="140" cy="130" r="5" fill="#000" stroke="#fff" stroke-width="0.5"/>
-                  <circle cx="140" cy="210" r="5" fill="#fff" opacity="0.15"/>
-                </g>
-                <!-- Ink wash landscape at bottom -->
-                <g filter="url(#inkWash)" opacity="0.1">
-                  <path d="M0 380 L0 310 Q40 280 80 300 Q140 260 200 290 Q240 270 280 280 L280 380Z" fill="#fff"/>
-                </g>
-                <text x="140" y="350" text-anchor="middle" fill="#fff" font-family="'Bebas Neue', sans-serif" font-size="28" letter-spacing="0.15em" opacity="0.1">PORTFOLIO</text>
-              </svg>
-            </div>
-          </div>
+      <!-- Procrastination quote -->
+      <blockquote class="blog-quote" data-reveal>
+        <p class="blog-quote-text">The more I learn,<br>the larger my ignorance becomes.<br>I must be making tremendous progress.</p>
+        <cite class="blog-quote-attr">— a perpetual beginner</cite>
+      </blockquote>
+
+      <!-- Header -->
+      <div class="blog-header" data-reveal>
+        <div class="section-label">
+          <span class="section-num">03</span>
+          <span class="section-line"></span>
+          <span class="section-tag">Blog</span>
         </div>
-
-        <div class="about-col about-col--right" data-reveal>
-          <h2 class="about-headline">I believe great design lives in the tension between opposites.</h2>
-          <div class="about-body">
-            <p>For over a decade, I've been crafting digital experiences that embrace duality — where bold meets subtle, where structure meets fluidity, where the familiar meets the unexpected.</p>
-            <p>My practice is rooted in the philosophy of yin and yang: the understanding that contrary forces are interconnected. Every dark interface needs a point of light. Every minimal layout needs a moment of surprise.</p>
-          </div>
-
-          <div class="skills-row">
-            <div class="skill-col">
-              <h4 class="skill-heading">Yin <span>— Design</span></h4>
-              <ul class="skill-list">
-                <li>UI/UX Design</li>
-                <li>Brand Identity</li>
-                <li>Typography</li>
-                <li>Art Direction</li>
-              </ul>
-            </div>
-            <div class="skill-col">
-              <h4 class="skill-heading">Yang <span>— Code</span></h4>
-              <ul class="skill-list">
-                <li>Frontend Dev</li>
-                <li>Creative Coding</li>
-                <li>Motion Design</li>
-                <li>WebGL / Three.js</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <h2 class="section-title">Thoughts</h2>
+        <p class="blog-intro">I don't write often — inspiration arrives on its own schedule, not mine. But when the words form, I leave them here.</p>
       </div>
+
+      <!-- Blog post list -->
+      <div class="blog-list">
+
+        <article class="blog-post" data-reveal>
+          <div class="blog-post-meta">
+            <time class="blog-post-date">Jan 2026</time>
+            <span class="blog-post-tag">Design</span>
+          </div>
+          <div class="blog-post-body">
+            <h3 class="blog-post-title">The beauty of the unfinished thing</h3>
+            <p class="blog-post-excerpt">There is a Japanese concept — <em>ma</em> — the negative space between things. I've been thinking about how it applies to work left incomplete by choice rather than by neglect.</p>
+          </div>
+          <a href="#" class="blog-post-link"><span>Read</span><span class="blog-post-arrow">→</span></a>
+        </article>
+
+        <article class="blog-post" data-reveal>
+          <div class="blog-post-meta">
+            <time class="blog-post-date">Sep 2025</time>
+            <span class="blog-post-tag">Reflections</span>
+          </div>
+          <div class="blog-post-body">
+            <h3 class="blog-post-title">On contrast: why I work in black and white</h3>
+            <p class="blog-post-excerpt">Every screen in my studio defaults to greyscale — not because colour doesn't exist, but because the underlying form has to hold before anything else can.</p>
+          </div>
+          <a href="#" class="blog-post-link"><span>Read</span><span class="blog-post-arrow">→</span></a>
+        </article>
+
+      </div>
+
+      <!-- See all posts -->
+      <div class="blog-all-wrap" data-reveal>
+        <a href="#" class="blog-all-link">
+          <span>All Posts</span>
+          <span class="blog-all-count">02</span>
+          <span class="blog-all-arrow">→</span>
+        </a>
+      </div>
+
     </div>
   </section>
 
