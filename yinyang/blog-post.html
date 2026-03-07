@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The beauty of the unfinished thing — Yin & Yang</title>
+  <link rel="stylesheet" href="blog-post.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Global SVG Filters & Defs (shared with main page) -->
+  <svg class="svg-defs" aria-hidden="true">
+    <defs>
+      <filter id="ricePaper" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" seed="2" stitchTiles="stitch" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+        <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blend"/>
+      </filter>
+      <filter id="inkBleed" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="inkBleedHeavy" x="-15%" y="-15%" width="130%" height="130%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="5" seed="8" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="inkWash" x="-5%" y="-5%" width="110%" height="110%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="12" result="noise"/>
+        <feDisplacementMap in="blur" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="readingProgress">
+    <div class="reading-progress-bar" id="readingBar"></div>
+  </div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <svg class="preloader-yy" viewBox="0 0 200 200" width="100" height="100">
+        <circle cx="100" cy="100" r="98" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.2"/>
+        <path d="M100 2 A98 98 0 0 1 100 198 A49 49 0 0 1 100 100 A49 49 0 0 0 100 2Z" fill="#fff" filter="url(#inkBleed)"/>
+        <circle cx="100" cy="51" r="14" fill="#000"/>
+        <circle cx="100" cy="149" r="14" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 40 40" width="28" height="28">
+        <path d="M20 0 A20 20 0 0 1 20 40 A10 10 0 0 1 20 20 A10 10 0 0 0 20 0Z" fill="currentColor"/>
+        <circle cx="20" cy="10" r="2.5" fill="var(--inverse)"/>
+        <circle cx="20" cy="30" r="2.5" fill="currentColor"/>
+        <circle cx="20" cy="20" r="19.5" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      </svg>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#work" class="nav-link">Work</a>
+      <a href="index.html#blog" class="nav-link nav-link--active">Blog</a>
+      <a href="index.html#philosophy" class="nav-link">Journey</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Toggle menu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+  </nav>
+
+  <!-- ======== ARTICLE HERO ======== -->
+  <header class="post-hero">
+
+    <!-- Ink wash mountains -->
+    <svg class="post-hero-mountains" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g filter="url(#inkWash)" opacity="0.09">
+        <path d="M0 600 L0 360 Q100 300 220 330 Q380 265 540 295 Q700 235 860 270 Q1020 245 1200 258 L1200 600Z" fill="#fff"/>
+        <path d="M0 600 L0 430 Q130 395 270 415 Q440 375 620 395 Q800 370 970 385 Q1100 370 1200 378 L1200 600Z" fill="#fff" opacity="0.6"/>
+        <path d="M0 600 L0 510 Q180 485 360 500 Q560 475 760 490 Q960 472 1200 482 L1200 600Z" fill="#fff" opacity="0.3"/>
+      </g>
+      <g filter="url(#inkBleedHeavy)" opacity="0.05">
+        <ellipse cx="300" cy="450" rx="280" ry="28" fill="#fff"/>
+        <ellipse cx="900" cy="390" rx="220" ry="22" fill="#fff"/>
+      </g>
+    </svg>
+
+    <!-- Bamboo left -->
+    <svg class="post-bamboo post-bamboo--left" viewBox="0 0 120 700" preserveAspectRatio="xMinYMax slice" aria-hidden="true">
+      <g filter="url(#inkBleed)" opacity="0.1">
+        <path d="M32 700 Q30 580 34 450 Q32 365 35 270 Q33 175 37 80 Q36 38 38 0" fill="none" stroke="#fff" stroke-width="3"/>
+        <ellipse cx="33" cy="450" rx="5" ry="2" fill="#fff"/>
+        <ellipse cx="35" cy="310" rx="5" ry="2" fill="#fff"/>
+        <ellipse cx="36" cy="175" rx="4" ry="2" fill="#fff"/>
+        <path d="M34 430 Q10 412 3 392" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M34 425 Q8 420 2 400" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+        <path d="M35 292 Q12 276 6 258" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M36 158 Q60 142 70 122" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M36 153 Q63 149 74 130" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+        <!-- Stalk 2 -->
+        <path d="M62 700 Q60 570 64 430 Q62 348 65 248 Q64 168 66 78" fill="none" stroke="#fff" stroke-width="2.5"/>
+        <ellipse cx="63" cy="430" rx="4" ry="2" fill="#fff"/>
+        <ellipse cx="64" cy="288" rx="4" ry="2" fill="#fff"/>
+        <path d="M64 412 Q86 396 96 377" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M65 268 Q44 254 34 236" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <!-- Bamboo right -->
+    <svg class="post-bamboo post-bamboo--right" viewBox="0 0 120 700" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+      <g filter="url(#inkBleed)" opacity="0.07">
+        <path d="M88 700 Q86 565 90 430 Q88 338 91 228 Q90 148 92 40" fill="none" stroke="#fff" stroke-width="3"/>
+        <ellipse cx="89" cy="430" rx="5" ry="2" fill="#fff"/>
+        <ellipse cx="90" cy="280" rx="4" ry="2" fill="#fff"/>
+        <path d="M90 412 Q65 395 56 374" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M90 407 Q62 403 54 382" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>
+        <path d="M91 262 Q114 248 122 228" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Cherry blossom -->
+        <path d="M92 140 Q108 118 116 92 Q120 70 112 48" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="116" cy="92" r="3" fill="#fff" opacity="0.08"/>
+        <circle cx="112" cy="50" r="2.5" fill="#fff" opacity="0.06"/>
+        <circle cx="109" cy="72" r="2" fill="#fff" opacity="0.05"/>
+      </g>
+    </svg>
+
+    <!-- Hero content -->
+    <div class="post-hero-inner">
+
+      <!-- Back link -->
+      <a href="index.html#blog" class="post-back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back</span>
+      </a>
+
+      <!-- Tags -->
+      <div class="post-meta-label">
+        <div class="post-meta-tags">
+          <span class="post-meta-tag">Design</span>
+          <span class="post-meta-tag">Philosophy</span>
+        </div>
+      </div>
+
+      <!-- Date -->
+      <time class="post-hero-date" datetime="2026-01">January 2026</time>
+
+      <!-- Title -->
+      <h1 class="post-title">
+        <span class="post-title-line"><span class="post-word">The Beauty</span></span>
+        <span class="post-title-line"><span class="post-word post-word--light">of the</span></span>
+        <span class="post-title-line"><span class="post-word post-word--outline">Unfinished</span></span>
+        <span class="post-title-line"><span class="post-word">Thing</span></span>
+      </h1>
+
+    </div>
+
+    <!-- Scroll indicator at base of hero -->
+    <div class="post-scroll-indicator" aria-hidden="true">
+      <span class="post-scroll-label">Scroll</span>
+      <div class="post-scroll-line">
+        <div class="post-scroll-dot"></div>
+      </div>
+    </div>
+
+    <!-- Ink ridge transitioning to white -->
+    <div class="post-hero-ridge" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+        <path d="M0 90 L0 55 Q100 20 220 40 Q380 8 540 30 Q700 5 860 26 Q1020 8 1180 24 Q1320 12 1440 18 L1440 90Z" fill="var(--white)" filter="url(#inkBleedHeavy)"/>
+      </svg>
+    </div>
+
+  </header>
+
+  <!-- ======== ARTICLE BODY ======== -->
+  <main class="post-body">
+
+    <!-- Rice paper texture -->
+    <div class="post-body-texture" aria-hidden="true"></div>
+
+    <!-- Decorative bamboo (light side) -->
+    <svg class="post-body-bamboo" viewBox="0 0 80 1000" preserveAspectRatio="xMaxYMid meet" aria-hidden="true">
+      <g filter="url(#inkBleed)" opacity="0.05">
+        <path d="M65 0 Q63 120 67 240 Q65 360 68 480 Q67 620 69 760 Q68 880 70 1000" fill="none" stroke="#000" stroke-width="2.5"/>
+        <ellipse cx="66" cy="240" rx="4" ry="1.5" fill="#000"/>
+        <ellipse cx="67" cy="460" rx="4" ry="1.5" fill="#000"/>
+        <ellipse cx="68" cy="700" rx="4" ry="1.5" fill="#000"/>
+        <path d="M67 222 Q48 208 40 190" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M67 217 Q45 212 38 195" fill="none" stroke="#000" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M68 442 Q88 428 96 410" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M69 682 Q48 668 40 650" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <article class="post-article" id="article">
+
+      <!-- Lead paragraph with drop cap -->
+      <p class="post-lead" data-reveal>
+        There is a Japanese concept — <em>ma</em> — the negative space between things. It lives in the pause between musical notes, in the interval between brush strokes, in the held breath before a sentence completes itself. I've been thinking about it a lot lately. Not because I sought it out, but because I stumbled into it by accident.
+      </p>
+
+      <p data-reveal>I left a project half-finished three weeks ago. Not abandoned — just set aside, deliberately, with the intention of returning. But in the leaving, something changed. The incomplete work took on a different quality. The missing pieces became as present as the finished ones. Absence, I was learning, has its own weight.</p>
+
+      <!-- ── Section 1 ── -->
+      <h2 data-reveal>The Western Obsession<br>With Completion</h2>
+
+      <p data-reveal>We have inherited from somewhere — the industrial revolution, perhaps, or Aristotle — a deep suspicion of the unfinished. Products ship when done. Stories resolve. Designs get approved and handed off. The incomplete is treated as a failure of process, a debt to be repaid.</p>
+
+      <p data-reveal>But consider the Japanese concept of <em>wabi-sabi</em>: the acceptance of impermanence and imperfection. A ceramic bowl is more beautiful for the crack that runs through it. A garden path is more inviting for the moss that has crept between the stones. These are not flaws to be corrected — they are evidence of time, of use, of life. They are proof that the object has existed in the world, not merely been manufactured for it.</p>
+
+      <!-- Pull quote 1 -->
+      <blockquote class="post-pullquote" data-reveal>
+        <p>The space between the notes<br>is what makes music.<br>The rest is just sound.</p>
+      </blockquote>
+
+      <!-- ── Section 2 ── -->
+      <h2 data-reveal>The Discipline of Restraint</h2>
+
+      <p data-reveal>What I've been learning — slowly, imperfectly — is that restraint is a practice, not a talent. The hardest thing in design is not adding the perfect element but resisting the urge to add one more. Every addition narrows the space for the viewer's imagination. Every extra word crowds out the one the reader was about to hear in their own voice.</p>
+
+      <p data-reveal>Leaving something unfinished is an act of trust. You are trusting the reader, the viewer, the user, to fill in the rest. You are acknowledging that their interpretation has value — that your work is not complete until it meets a mind. The Japanese architect Tadao Ando speaks of designing with shadow as much as with light. The wall is not only where it stands; it exists equally in the darkness it casts.</p>
+
+      <p data-reveal>To design only what is visible is to design only half of what is there.</p>
+
+      <!-- Pull quote 2 -->
+      <blockquote class="post-pullquote" data-reveal>
+        <p>Restraint is not absence.<br>It is the most deliberate<br>form of presence.</p>
+      </blockquote>
+
+      <!-- ── Section 3 ── -->
+      <h2 data-reveal>What the Gap Teaches</h2>
+
+      <p data-reveal>Three weeks later, I returned to my unfinished project. I expected to find it lacking, diminished by the time away. Instead, I found it had grown in my absence. The gap had done something useful: it had given me distance, and distance had given me clarity. What I thought was missing turned out to be unnecessary. The silences I had been afraid of were doing the work I was interrupting.</p>
+
+      <p data-reveal>I made two small changes and stopped. The work was done — not because all the space was filled, but because what remained empty was the right kind of empty. Intentional. <em>Ma</em>.</p>
+
+      <p data-reveal>This, I think, is the real skill. Not the filling, but the knowing when to stop. Not the doing, but the recognition that you've already arrived. We talk endlessly about craft and mastery, but perhaps the highest craft is the one that trusts its own completion — even when the surface still shows the brush, still breathes, still holds something back for the one looking in.</p>
+
+      <!-- End mark -->
+      <div class="post-endmark" aria-hidden="true">
+        <svg viewBox="0 0 200 200" width="30" height="30">
+          <defs>
+            <clipPath id="emLeft"><rect x="0" y="0" width="100" height="200"/></clipPath>
+            <clipPath id="emRight"><rect x="100" y="0" width="100" height="200"/></clipPath>
+          </defs>
+          <g clip-path="url(#emLeft)">
+            <path d="M100 2 A98 98 0 0 1 100 198 A49 49 0 0 1 100 100 A49 49 0 0 0 100 2Z" fill="#000" opacity="0.45" filter="url(#inkBleed)"/>
+            <circle cx="100" cy="51" r="9" fill="var(--white)"/>
+          </g>
+          <g clip-path="url(#emRight)">
+            <path d="M100 2 A98 98 0 0 0 100 198 A49 49 0 0 0 100 100 A49 49 0 0 1 100 2Z" fill="#000" opacity="0.45" filter="url(#inkBleed)"/>
+            <circle cx="100" cy="149" r="9" fill="var(--white)"/>
+          </g>
+          <circle cx="100" cy="100" r="98" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+        </svg>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- ======== Ink divider — light to dark ======== -->
+  <div class="ink-divider">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0 0 L0 40 Q120 90 240 60 Q360 110 480 70 Q600 120 720 80 Q840 115 960 85 Q1080 110 1200 75 Q1320 100 1440 90 L1440 0Z" fill="var(--black)" filter="url(#inkBleedHeavy)"/>
+    </svg>
+  </div>
+
+  <!-- ======== POST NAVIGATION ======== -->
+  <nav class="post-nav" aria-label="Post navigation">
+
+    <a href="index.html#blog" class="post-nav-all">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3 7h8M6 4l-3 3 3 3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>All Posts</span>
+    </a>
+
+    <div class="post-nav-links">
+      <a href="#" class="post-nav-item post-nav-item--prev">
+        <span class="post-nav-arrow">←</span>
+        <span class="post-nav-dir">Previous</span>
+        <span class="post-nav-title">On contrast: why I work in black and white</span>
+      </a>
+      <div class="post-nav-sep"></div>
+      <a href="#" class="post-nav-item post-nav-item--next">
+        <span class="post-nav-arrow">→</span>
+        <span class="post-nav-dir">Next</span>
+        <span class="post-nav-title">Something new is coming</span>
+      </a>
+    </div>
+
+  </nav>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <svg viewBox="0 0 40 40" width="20" height="20">
+          <path d="M20 0 A20 20 0 0 1 20 40 A10 10 0 0 1 20 20 A10 10 0 0 0 20 0Z" fill="currentColor"/>
+          <circle cx="20" cy="10" r="2.5" fill="#000"/>
+          <circle cx="20" cy="30" r="2.5" fill="#fff"/>
+          <circle cx="20" cy="20" r="19.5" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </svg>
+        <span>&copy; 2026 Yin & Yang</span>
+      </div>
+      <span class="footer-note">Crafted in the balance between light and dark</span>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    "use strict";
+
+    // ---- Custom Cursor ----
+    const cursor = document.getElementById("cursor");
+
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+
+    document.querySelectorAll("a, button").forEach((el) => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
+    });
+
+    // ---- Preloader ----
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("preloader").classList.add("done");
+      }, 1200);
+    });
+
+    // ---- Reading Progress ----
+    const article = document.getElementById("article");
+    const bar = document.getElementById("readingBar");
+
+    function updateProgress() {
+      const top = article.getBoundingClientRect().top + window.scrollY;
+      const height = article.offsetHeight;
+      const scrolled = window.scrollY - top + window.innerHeight * 0.4;
+      const progress = Math.max(0, Math.min(1, scrolled / (height - window.innerHeight * 0.2)));
+      bar.style.width = (progress * 100) + "%";
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+
+    // ---- Scroll Reveal ----
+    const reveals = document.querySelectorAll("[data-reveal]");
+    const revealObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            revealObs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    reveals.forEach((el) => revealObs.observe(el));
+
+    // ---- Hero parallax ----
+    const postHero = document.querySelector(".post-hero");
+    const postMountains = document.querySelector(".post-hero-mountains");
+    const postBamboos = document.querySelectorAll(".post-bamboo");
+    const postScrollEl = document.querySelector(".post-scroll-indicator");
+
+    window.addEventListener("scroll", () => {
+      const sy = window.scrollY;
+      if (!postHero || sy > postHero.offsetHeight) return;
+      const p = sy / postHero.offsetHeight;
+
+      if (postMountains) postMountains.style.transform = `translateY(${sy * -0.07}px)`;
+      postBamboos.forEach(b => b.style.transform = `translateY(${sy * -0.04}px)`);
+      if (postScrollEl) {
+        postScrollEl.style.transform = `translateY(${sy * 0.15}px)`;
+        postScrollEl.style.opacity = Math.max(0, 1 - p * 4);
+      }
+    }, { passive: true });
+
+    // ---- Mobile Nav ----
+    const burger = document.getElementById("navBurger");
+    const navLinks = document.getElementById("navLinks");
+
+    if (burger && navLinks) {
+      burger.addEventListener("click", () => {
+        burger.classList.toggle("active");
+        navLinks.classList.toggle("open");
+        document.body.style.overflow = navLinks.classList.contains("open") ? "hidden" : "";
+      });
+      navLinks.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          burger.classList.remove("active");
+          navLinks.classList.remove("open");
+          document.body.style.overflow = "";
+        });
+      });
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
