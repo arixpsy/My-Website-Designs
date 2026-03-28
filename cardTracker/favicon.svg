@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Blue back card, rotated clockwise (matches float-card-2 accent color) -->
+  <rect x="8" y="3" width="20" height="27" rx="3.5" fill="#2d2de0" transform="rotate(10 18 16.5)"/>
+  <!-- Dark front card with gold V monogram (matches float-card-1 dark color) -->
+  <g transform="rotate(-6 14 16.5)">
+    <rect x="4" y="3" width="20" height="27" rx="3.5" fill="#0f0f14"/>
+    <!-- Subtle gloss overlay -->
+    <rect x="4" y="3" width="20" height="27" rx="3.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.75"/>
+    <!-- Gold V for Vault -->
+    <path d="M8 11 L14 22 L20 11" fill="none" stroke="#c9933a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+</svg>
