@@ -1075,15 +1075,205 @@
       50% { opacity: 1; transform: scale(1.3); }
     }
 
-    /* ─── RESPONSIVE TWEAKS ─── */
+    /* ─── RESPONSIVE: TABLET ─── */
     @media (max-width: 900px) {
       .budget-overview { grid-template-columns: 1fr 1fr; }
       .analytics-stats { grid-template-columns: 1fr 1fr; }
       .analytics-grid { grid-template-columns: 1fr; }
       .chart-card.wide { grid-column: span 1; }
-      .dash-body { grid-template-columns: 1fr 1fr; }
-      .col-2 { grid-column: span 2; }
-      .col-3 { grid-column: span 2; }
+      .dash-body { grid-template-columns: 1fr; }
+      .col-2 { grid-column: span 1; }
+      .col-3 { grid-column: span 1; }
+      .scene { width: 420px; height: 260px; }
+      .page-title { font-size: 42px; }
+    }
+
+    /* ─── RESPONSIVE: MOBILE ─── */
+    @media (max-width: 640px) {
+      body { overflow: auto; }
+
+      #app {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      /* Sidebar → bottom tab bar */
+      #sidebar {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        padding: 0 8px;
+        gap: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        justify-content: space-around;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .logo { display: none; }
+      .sidebar-spacer { display: none; }
+      .nav-item[title="Settings"] { display: none; }
+
+      .nav-item {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+      }
+      .nav-tooltip { display: none; }
+
+      #content {
+        flex: 1;
+        padding-bottom: 68px; /* space for bottom bar */
+      }
+
+      .page { position: relative; }
+
+      /* ── Hero ── */
+      .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 24px 16px 100px;
+      }
+
+      .hero-bg-text { font-size: 60px; }
+      .hero-title { font-size: 42px; letter-spacing: 2px; margin-bottom: 28px; }
+      .hero-label { font-size: 10px; margin-bottom: 12px; }
+
+      .scene {
+        width: 100%;
+        max-width: 320px;
+        height: 220px;
+      }
+
+      .card-slot {
+        width: 110px;
+        height: 154px;
+        margin-left: -55px;
+        margin-top: -77px;
+      }
+
+      .carousel-controls { margin-top: 24px; }
+
+      /* Stats strip → scrollable row */
+      .stats-strip {
+        position: relative;
+        height: auto;
+        flex-wrap: wrap;
+      }
+
+      .stat-cell {
+        flex: 1 1 33.33%;
+        min-width: 0;
+        padding: 12px 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .stat-cell:nth-child(4),
+      .stat-cell:nth-child(5) {
+        flex: 1 1 50%;
+      }
+
+      .stat-label { font-size: 8px; letter-spacing: 0.06em; }
+      .stat-value { font-size: 16px; }
+
+      /* Dashboard body */
+      .dash-body {
+        padding: 24px 16px 40px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .col-2, .col-3 { grid-column: span 1; }
+      .section-title { font-size: 22px; }
+
+      /* ── Pages ── */
+      #page-expenses,
+      #page-collection,
+      #page-analytics {
+        padding: 24px 16px 40px;
+      }
+
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .page-title { font-size: 36px; }
+      .page-subtitle { font-size: 10px; }
+
+      /* Budget overview */
+      .budget-overview {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .bc-value { font-size: 20px; }
+
+      /* Expense table → horizontal scroll */
+      .expense-table-wrap { overflow-x: auto; }
+      .expense-table { min-width: 520px; }
+      .expense-filters { flex-direction: column; gap: 8px; }
+      .filter-input { min-width: unset; width: 100%; }
+
+      /* Collection */
+      .collection-controls { gap: 8px; }
+      .search-wrap { min-width: unset; width: 100%; }
+      .collection-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+      }
+
+      /* List view mobile */
+      .list-row { flex-wrap: wrap; gap: 10px; padding: 12px; }
+      .list-price { font-size: 14px; }
+
+      /* Analytics */
+      .analytics-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .astat-val { font-size: 22px; }
+      .analytics-grid { grid-template-columns: 1fr; gap: 16px; }
+      .chart-card.wide { grid-column: span 1; }
+
+      /* Modals */
+      .modal {
+        width: 100%;
+        max-width: 100vw;
+        border-radius: 20px 20px 0 0;
+        padding: 24px 20px;
+        max-height: 85vh;
+      }
+      .modal-overlay {
+        align-items: flex-end;
+      }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .modal-title { font-size: 24px; }
+
+      /* Toast */
+      .toast-container {
+        bottom: 72px; /* above bottom bar */
+        right: 16px;
+        left: 16px;
+      }
+
+      /* Sparkles hide on mobile for cleanliness */
+      .sparkle { display: none; }
+    }
+
+    /* ─── RESPONSIVE: SMALL MOBILE ─── */
+    @media (max-width: 380px) {
+      .hero-title { font-size: 32px; }
+      .scene { max-width: 260px; height: 180px; }
+      .card-slot {
+        width: 90px;
+        height: 126px;
+        margin-left: -45px;
+        margin-top: -63px;
+      }
+      .budget-overview { grid-template-columns: 1fr; }
+      .analytics-stats { grid-template-columns: 1fr; }
+      .collection-grid { grid-template-columns: repeat(2, 1fr); }
+      .page-title { font-size: 28px; }
     }
   </style>
 </head>
@@ -1587,7 +1777,7 @@ function buildCarousel() {
   (cards.length ? cards : [{ name: 'Add your first card', currentValue: 0, rarity: 'Common', artIndex: 0 }]).forEach((card, i) => {
     const angle = (i - carouselIndex) * angleStep - 90;
     const rad = angle * Math.PI / 180;
-    const radius = 280;
+    const radius = window.innerWidth <= 380 ? 140 : window.innerWidth <= 640 ? 180 : 280;
     const x = Math.cos(rad) * radius;
     const z = Math.sin(rad) * radius - radius;
     const scale = 0.6 + (Math.sin(rad + Math.PI/2) + 1) * 0.25;
@@ -2117,6 +2307,13 @@ document.addEventListener('keydown', e => {
 // ═══════════════════════════════════════════
 seedData();
 renderDashboard();
+
+// Rebuild carousel on resize for responsive radius
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { if (currentPage === 'dashboard') buildCarousel(); }, 150);
+});
 </script>
 </body>
 </html>
